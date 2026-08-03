@@ -1,0 +1,93 @@
+---
+const links = [
+  { href: '#modelo', label: 'El modelo' },
+  { href: '#por-que-ahora', label: 'Por qué ahora' },
+  { href: '#casos', label: 'Casos' },
+  { href: '#co-inversion', label: 'Co-inversión' },
+  { href: '#riesgos', label: 'Riesgos' },
+];
+const mailto =
+  'mailto:nicolasminahk@gmail.com?subject=Quiero%20saber%20m%C3%A1s%20sobre%20recoBA';
+---
+
+<header
+  id="nav"
+  class="fixed inset-x-0 top-0 z-50 border-b border-ink/0 transition-[background-color,border-color,box-shadow] duration-300"
+>
+  <nav
+    class="mx-auto flex h-[4.5rem] max-w-[88rem] items-center justify-between px-5 md:px-10"
+    aria-label="Navegación principal"
+  >
+    <a href="#top" class="flex items-center gap-2.5" aria-label="recoBA — inicio">
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="12" class="fill-ink"></rect>
+        <path
+          d="M16 48 V34 a16 16 0 0 1 32 0 V48"
+          fill="none"
+          stroke="#C2603D"
+          stroke-width="4.5"
+          stroke-linecap="round"></path>
+        <line x1="12" y1="48" x2="52" y2="48" stroke="#F7F3EC" stroke-width="3.5" stroke-linecap="round"
+        ></line>
+      </svg>
+      <span class="font-display text-[1.25rem] font-semibold tracking-[0.01em]"
+        >reco<span class="text-copper">BA</span></span
+      >
+    </a>
+
+    <ul class="hidden items-center gap-7 lg:flex">
+      {
+        links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              class="text-[0.9rem] font-medium text-ink/70 transition-colors hover:text-copper"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <a href={mailto} class="btn btn-copper !px-5 !py-2.5 text-[0.88rem]" data-magnetic>
+        Hablemos <span class="arr" aria-hidden="true">→</span>
+      </a>
+      <button
+        id="menu-btn"
+        class="flex h-10 w-10 items-center justify-center rounded-full border border-ink/20 lg:hidden"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true">
+          <line x1="0" y1="1" x2="18" y2="1" stroke="currentColor" stroke-width="1.5"></line>
+          <line x1="0" y1="6" x2="18" y2="6" stroke="currentColor" stroke-width="1.5"></line>
+          <line x1="0" y1="11" x2="18" y2="11" stroke="currentColor" stroke-width="1.5"></line>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <div
+    id="mobile-menu"
+    class="hidden border-t border-ink/10 bg-paper px-5 pt-2 pb-6 lg:hidden"
+  >
+    <ul class="flex flex-col">
+      {
+        links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              class="block border-b border-ink/8 py-3.5 font-display text-lg font-medium"
+              data-menu-link
+            >
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>

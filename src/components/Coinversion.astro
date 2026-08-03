@@ -1,0 +1,209 @@
+---
+const pilares = [
+  {
+    titulo: 'Fideicomiso',
+    texto: 'Fiduciario profesional y patrimonio separado: el estándar argentino.',
+    icon: 'shield',
+  },
+  {
+    titulo: 'Invierte sin viajar',
+    texto: 'Poder apostillado y CDI/CUIT vía apoderado. Todo a distancia.',
+    icon: 'plane',
+  },
+  {
+    titulo: '3–5 co-inversores',
+    texto: 'Grupos pequeños: sabes en qué piso inviertes y con quién.',
+    icon: 'group',
+  },
+];
+
+const cascada = [
+  {
+    orden: '1º',
+    titulo: 'Renta preferente',
+    texto: '6% anual en USD, trimestral y acumulativa.',
+  },
+  {
+    orden: '2º',
+    titulo: 'Devolución del capital',
+    texto: 'El 100% de tu capital vuelve antes de repartir plusvalía.',
+  },
+  {
+    orden: '3º',
+    titulo: 'Plusvalía 80 / 20',
+    texto: '80% inversores, 20% recoBA: solo cobramos éxito si tú ganas.',
+  },
+];
+---
+
+<section id="co-inversion" class="relative bg-ink py-24 text-paper md:py-32">
+  <div class="pointer-events-none absolute inset-0 techgrid-dark" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-[88rem] px-5 md:px-10">
+    <div class="max-w-[46rem]">
+      <p class="eyebrow text-copper" data-reveal>Co-inversión</p>
+      <h2 class="display mt-4 text-[clamp(2.2rem,4.5vw,3.8rem)]" data-reveal>
+        Estructura pensada para<br class="hidden md:block" /> que tú cobres primero
+      </h2>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-paper/12 bg-paper/12 md:grid-cols-3">
+      {
+        pilares.map((p) => (
+          <article class="bg-ink p-8 md:p-9" data-reveal>
+            {p.icon === 'shield' && (
+              <svg class="a-draw h-11 w-11 text-copper" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M22 4 L38 10 V22 C38 32 30 38 22 40 C14 38 6 32 6 22 V10 Z" />
+                <path d="M15 22 L20 27 L30 17" />
+              </svg>
+            )}
+            {p.icon === 'plane' && (
+              <svg class="a-draw h-11 w-11 text-copper" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M4 26 L40 12 L30 40 L22 30 Z" />
+                <line x1="40" y1="12" x2="22" y2="30" />
+              </svg>
+            )}
+            {p.icon === 'group' && (
+              <svg class="a-draw h-11 w-11 text-copper" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <circle cx="15" cy="15" r="6" />
+                <circle cx="31" cy="17" r="5" />
+                <path d="M5 37 C5 29 11 26 15 26 C19 26 25 29 25 37" />
+                <path d="M27 34 C28 28 31 27 31 27 C34 27 39 29 39 35" />
+              </svg>
+            )}
+            <h3 class="display mt-6 text-xl">{p.titulo}</h3>
+            <p class="mt-3 text-[0.92rem] leading-relaxed text-paper/65">{p.texto}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Cascada de retorno -->
+    <div class="mt-16 grid grid-cols-12 gap-x-6 gap-y-10">
+      <div class="col-span-12 lg:col-span-5">
+        <p class="eyebrow text-copper" data-reveal>La cascada de retorno</p>
+        <h3 class="display mt-3 text-[clamp(1.7rem,2.8vw,2.4rem)]" data-reveal>
+          Cada dólar sigue<br />un orden fijo
+        </h3>
+        <p class="mt-5 max-w-[28rem] text-paper/65" data-reveal>
+          Escrita en el contrato de fideicomiso; el fiduciario la ejecuta en ese orden.
+        </p>
+      </div>
+      <div class="col-span-12 lg:col-span-7">
+        <ol class="relative flex flex-col gap-4" data-cascada>
+          {
+            cascada.map((paso, i) => (
+              <li
+                class="relative flex items-start gap-6 rounded-2xl border border-paper/14 bg-paper/[0.04] p-6 md:p-7"
+                data-cascada-step
+                style={`margin-left: ${i * 5}%;`}
+              >
+                <span class="display tnum shrink-0 text-[1.9rem] leading-none text-copper">{paso.orden}</span>
+                <div>
+                  <h4 class="display text-lg">{paso.titulo}</h4>
+                  <p class="mt-1.5 text-[0.9rem] leading-relaxed text-paper/60">{paso.texto}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+
+    <!-- Calculadora -->
+    <div class="mt-20 overflow-hidden rounded-3xl bg-paper text-ink" data-reveal>
+      <div class="grid grid-cols-12">
+        <div class="col-span-12 border-b border-ink/10 p-8 md:p-10 lg:col-span-5 lg:border-r lg:border-b-0">
+          <p class="eyebrow text-copper">Calculadora</p>
+          <h3 class="display mt-3 text-[1.9rem]">¿Cuánto rinde tu ticket?</h3>
+          <p class="mt-3 text-[0.92rem] text-ink/60">
+            Sobre el caso metodológico de Recoleta (inversión total US$ 138.850) y un
+            ciclo de 5 años con 4,33 años efectivos de renta desde fin de obra.
+          </p>
+
+          <label for="calc-ticket" class="eyebrow mt-9 block text-ink/50">
+            Tu inversión
+          </label>
+          <p class="display tnum mt-2 text-[2.6rem] leading-none">
+            US$ <span id="calc-ticket-out">35.000</span>
+          </p>
+          <input
+            type="range"
+            id="calc-ticket"
+            min="25000"
+            max="50000"
+            step="500"
+            value="35000"
+            class="mt-5 w-full accent-copper"
+            aria-describedby="calc-note"
+          />
+          <div class="tnum mt-1 flex justify-between text-[0.75rem] text-ink/40">
+            <span>US$ 25.000</span><span>US$ 50.000</span>
+          </div>
+
+          <p class="eyebrow mt-8 text-ink/50" id="calc-esc-label">Escenario</p>
+          <div class="mt-3 flex gap-1 rounded-full border border-ink/15 p-1" role="group" aria-labelledby="calc-esc-label">
+            <button
+              class="flex-1 rounded-full px-3 py-2 text-[0.82rem] font-semibold transition-colors aria-pressed:bg-ink aria-pressed:text-paper"
+              data-esc="0"
+              aria-pressed="false"
+            >
+              Conservador
+            </button>
+            <button
+              class="flex-1 rounded-full px-3 py-2 text-[0.82rem] font-semibold transition-colors aria-pressed:bg-ink aria-pressed:text-paper"
+              data-esc="1"
+              aria-pressed="true"
+            >
+              Base
+            </button>
+            <button
+              class="flex-1 rounded-full px-3 py-2 text-[0.82rem] font-semibold transition-colors aria-pressed:bg-ink aria-pressed:text-paper"
+              data-esc="2"
+              aria-pressed="false"
+            >
+              Optimista
+            </button>
+          </div>
+        </div>
+
+        <div class="col-span-12 p-8 md:p-10 lg:col-span-7">
+          <dl class="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2" aria-live="polite">
+            <div>
+              <dt class="eyebrow text-ink/50">Renta preferente anual (6%)</dt>
+              <dd class="display tnum mt-2 text-[2.1rem]">US$ <span id="calc-pref">2.100</span></dd>
+            </div>
+            <div>
+              <dt class="eyebrow text-ink/50">Preferente acumulada (4,33 años)</dt>
+              <dd class="display tnum mt-2 text-[2.1rem]">US$ <span id="calc-pref-acum">9.093</span></dd>
+            </div>
+            <div>
+              <dt class="eyebrow text-ink/50">Plusvalía estimada (tu 80%)</dt>
+              <dd class="display tnum mt-2 text-[2.1rem]">US$ <span id="calc-plus">8.486</span></dd>
+            </div>
+            <div class="rounded-2xl bg-copper/10 p-5 -m-5 sm:m-0 sm:p-0 sm:bg-transparent sm:rounded-none">
+              <dt class="eyebrow text-copper">Total estimado a 5 años</dt>
+              <dd class="display tnum mt-2 text-[2.1rem] text-copper">
+                US$ <span id="calc-total">52.579</span>
+                <span class="mt-1 block font-sans text-[0.78rem] font-normal tracking-normal text-ink/50">
+                  capital + preferente + plusvalía
+                </span>
+              </dd>
+            </div>
+          </dl>
+
+          <p id="calc-cobertura" class="mt-8 rounded-xl border border-ink/10 bg-paper-2 p-4 text-[0.85rem] leading-relaxed text-ink/65">
+            En escenario base, la renta neta cubre 1,10x la preferente del conjunto de
+            inversores.
+          </p>
+          <p id="calc-note" class="mt-4 text-[0.75rem] leading-relaxed text-ink/45">
+            Simulación ilustrativa sobre el caso metodológico de Recoleta; no constituye
+            oferta ni garantía de rentabilidad. La preferente es objetivo, no garantizada:
+            en escenario conservador la cobertura es 0,81x y el defecto se acumula contra
+            la venta. Plusvalías del caso por escenario: US$ 13.017 / 42.081 / 78.741.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Flipping from '../components/Flipping.astro';
+import WhyBA from '../components/WhyBA.astro';
+import Modelo from '../components/Modelo.astro';
+import Casos from '../components/Casos.astro';
+import Coinversion from '../components/Coinversion.astro';
+import Compara from '../components/Compara.astro';
+import Riesgos from '../components/Riesgos.astro';
+import Roadmap from '../components/Roadmap.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base>
+  <Nav />
+  <main id="main">
+    <Hero />
+    <Flipping />
+    <WhyBA />
+    <Modelo />
+    <Casos />
+    <Coinversion />
+    <Compara />
+    <Riesgos />
+    <Roadmap />
+  </main>
+  <Footer />
+  <script>
+    import '../scripts/main.js';
+  </script>
+</Base>

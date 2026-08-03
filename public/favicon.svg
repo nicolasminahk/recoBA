@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#16181D"/>
+  <!-- arco de recova -->
+  <path d="M16 48 V34 a16 16 0 0 1 32 0 V48" fill="none" stroke="#C2603D" stroke-width="4.5" stroke-linecap="round"/>
+  <line x1="12" y1="48" x2="52" y2="48" stroke="#F7F3EC" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

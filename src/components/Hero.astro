@@ -1,0 +1,120 @@
+---
+const mailto =
+  'mailto:nicolasminahk@gmail.com?subject=Quiero%20saber%20m%C3%A1s%20sobre%20recoBA';
+---
+
+<section id="top" class="relative overflow-hidden pt-[8.5rem] pb-20 md:pt-[11rem] md:pb-28">
+  <div class="pointer-events-none absolute inset-0 techgrid opacity-70" aria-hidden="true"></div>
+
+  <div class="relative mx-auto grid max-w-[88rem] grid-cols-12 gap-x-6 px-5 md:px-10">
+    <div class="col-span-12">
+      <p class="eyebrow a-fade text-copper" data-hero-eyebrow>
+        Oportunidad de co-inversión · 2026
+      </p>
+
+      <h1
+        class="display mt-6 text-[clamp(2.6rem,6.6vw,6.25rem)]"
+        data-hero-title
+      >
+        <span class="a-line"><span>Invertir en Buenos Aires,</span></span>
+        <span class="a-line"><span>la capital <em class="not-italic text-copper">europea</em></span></span>
+        <span class="a-line"><span>de Latinoamérica</span></span>
+      </h1>
+    </div>
+
+    <div class="col-span-12 lg:col-span-7">
+      <p class="a-fade mt-8 max-w-[36rem] text-lg leading-relaxed text-ink/75" data-hero-sub>
+        Recuperamos propiedades: compramos bajo mercado, reformamos en 6–8 meses y
+        rentamos en dólares. Tú pones el capital; nosotros operamos.
+      </p>
+
+      <div class="a-fade mt-10 flex flex-wrap items-center gap-4" data-hero-ctas>
+        <a href={mailto} class="btn btn-copper" data-magnetic>
+          Agenda una llamada <span class="arr" aria-hidden="true">→</span>
+        </a>
+        <a href="#casos" class="btn btn-ghost" data-magnetic>
+          Ver el caso real <span class="arr" aria-hidden="true">↓</span>
+        </a>
+      </div>
+
+      <dl
+        class="a-fade mt-14 grid max-w-[42rem] grid-cols-1 gap-x-8 gap-y-8 border-t border-ink/12 pt-8 sm:grid-cols-3"
+        data-hero-stats
+      >
+        <div class="flex flex-col-reverse">
+          <dt class="eyebrow mt-2.5 text-ink/50">desde · por inversor</dt>
+          <dd class="display tnum text-[2rem] leading-none whitespace-nowrap">
+            US$&nbsp;<span data-countup data-to="27800">27.800</span>
+          </dd>
+        </div>
+        <div class="flex flex-col-reverse">
+          <dt class="eyebrow mt-2.5 text-ink/50">renta preferente anual · USD</dt>
+          <dd class="display tnum text-[2rem] leading-none">
+            <span data-countup data-to="6">6</span>&nbsp;%
+          </dd>
+        </div>
+        <div class="flex flex-col-reverse">
+          <dt class="eyebrow mt-2.5 text-ink/50">TIR objetivo a 5 años · USD</dt>
+          <dd class="display tnum text-[2rem] leading-none">
+            <span data-countup data-to="9">9</span>–<span data-countup data-to="12">12</span>&nbsp;%
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Fachada porteña — ilustración de línea, se dibuja al cargar -->
+    <div class="col-span-12 mt-14 hidden self-end lg:col-span-4 lg:col-start-9 lg:mt-0 lg:block">
+      <svg
+        class="a-draw mx-auto h-auto w-full max-w-[26rem]"
+        viewBox="0 0 440 560"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-label="Ilustración de línea de una fachada porteña clásica con recova de arcos"
+        role="img"
+        data-hero-facade
+      >
+        <!-- volumen -->
+        <rect x="40" y="40" width="360" height="480" />
+        <!-- cornisa superior -->
+        <line x1="24" y1="40" x2="416" y2="40" />
+        <line x1="32" y1="56" x2="408" y2="56" />
+        <!-- planta 2 -->
+        <rect x="76" y="92" width="64" height="112" />
+        <path d="M76 92 a32 32 0 0 1 64 0" />
+        <rect x="188" y="92" width="64" height="112" />
+        <path d="M188 92 a32 32 0 0 1 64 0" />
+        <rect x="300" y="92" width="64" height="112" />
+        <path d="M300 92 a32 32 0 0 1 64 0" />
+        <!-- balcones planta 2 -->
+        <line x1="64" y1="204" x2="152" y2="204" />
+        <line x1="176" y1="204" x2="264" y2="204" />
+        <line x1="288" y1="204" x2="376" y2="204" />
+        <line x1="70" y1="192" x2="70" y2="204" />
+        <line x1="146" y1="192" x2="146" y2="204" />
+        <line x1="182" y1="192" x2="182" y2="204" />
+        <line x1="258" y1="192" x2="258" y2="204" />
+        <line x1="294" y1="192" x2="294" y2="204" />
+        <line x1="370" y1="192" x2="370" y2="204" />
+        <!-- moldura entre plantas -->
+        <line x1="40" y1="236" x2="400" y2="236" />
+        <!-- planta 1 -->
+        <rect x="76" y="268" width="64" height="104" />
+        <rect x="188" y="268" width="64" height="104" />
+        <rect x="300" y="268" width="64" height="104" />
+        <line x1="108" y1="268" x2="108" y2="372" />
+        <line x1="220" y1="268" x2="220" y2="372" />
+        <line x1="332" y1="268" x2="332" y2="372" />
+        <!-- moldura sobre recova -->
+        <line x1="40" y1="400" x2="400" y2="400" />
+        <!-- recova: tres arcos -->
+        <path d="M68 520 V456 a42 42 0 0 1 84 0 V520" class="stroke-copper" stroke-width="2" />
+        <path d="M178 520 V456 a42 42 0 0 1 84 0 V520" class="stroke-copper" stroke-width="2" />
+        <path d="M288 520 V456 a42 42 0 0 1 84 0 V520" class="stroke-copper" stroke-width="2" />
+        <!-- línea de vereda -->
+        <line x1="16" y1="520" x2="424" y2="520" />
+        <line x1="4" y1="536" x2="436" y2="536" stroke-opacity="0.4" />
+      </svg>
+    </div>
+  </div>
+</section>
