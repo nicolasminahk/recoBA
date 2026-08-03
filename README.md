@@ -22,22 +22,20 @@ npm run build      # genera ./dist (estático)
 npm run preview    # sirve ./dist en local
 ```
 
-## Deploy — Cloudflare Pages (en un comando)
+## Deploy — Netlify (por Git)
 
-```bash
-npm run deploy
-```
+El repo está conectado a Netlify: cada push a `main` construye y publica
+automáticamente (build command `npm run build`, publish `dist`).
 
-Requiere una cuenta de Cloudflare (el primer `wrangler` te pedirá login). Crea el
-proyecto `recova` si no existe y publica `dist/`.
+Dominio: **recoba.casa**, registrado en GoDaddy, apuntando a Netlify por DNS:
 
-Alternativa por Git: conecta el repo en el dashboard de Cloudflare Pages con
-build command `npm run build` y output `dist`. (En Vercel funcionaría igual:
-framework preset «Astro».)
+| Tipo | Nombre | Valor |
+| --- | --- | --- |
+| A | `@` | `75.2.60.5` (apex load balancer de Netlify) |
+| CNAME | `www` | `<sitio>.netlify.app` (subdominio Netlify del proyecto) |
 
-> **Dominio**: la URL canónica está en `astro.config.mjs` (`site`). Cámbiala por
-> el dominio definitivo antes del primer deploy para que sitemap, OG y canonical
-> apunten bien.
+El resto de registros de GoDaddy (NS, SOA, `_domainconnect`, `_dmarc`) se dejan
+como están. La URL canónica vive en `astro.config.mjs` (`site`).
 
 ## Scripts auxiliares
 

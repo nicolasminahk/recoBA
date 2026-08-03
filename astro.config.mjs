@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://recova.ar',
+  site: 'https://recoba.casa',
   output: 'static',
   devToolbar: { enabled: false },
   integrations: [sitemap()],
