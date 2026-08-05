@@ -5,7 +5,7 @@ import { playChartsIn } from './charts.js';
 /** Estado de la barra de navegación al hacer scroll + menú móvil. */
 export function initNav() {
   const nav = document.getElementById('nav');
-  const scrolledClasses = ['bg-paper/90', 'backdrop-blur-md', 'border-ink/10', 'shadow-[0_1px_0_rgba(22,24,29,0.04)]'];
+  const scrolledClasses = ['bg-paper/60', 'backdrop-blur-xl', 'border-ink/10', 'shadow-[0_1px_0_rgba(22,24,29,0.04)]'];
   const onScroll = () => {
     const scrolled = window.scrollY > 40;
     scrolledClasses.forEach((c) => nav.classList.toggle(c, scrolled));

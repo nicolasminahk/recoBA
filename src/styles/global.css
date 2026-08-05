@@ -203,6 +203,45 @@ body {
   border-color: var(--color-paper);
 }
 
+/* Glass — translúcido con blur, sobre fondos claros y tinta */
+.glass {
+  background: color-mix(in srgb, #ffffff 40%, transparent);
+  backdrop-filter: blur(16px) saturate(1.15);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  border: 1px solid color-mix(in srgb, #ffffff 60%, transparent);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--color-ink) 7%, transparent);
+}
+.glass-ink {
+  background: color-mix(in srgb, var(--color-paper) 6%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--color-paper) 15%, transparent);
+}
+
+/* Manchas de color suaves detrás del glass */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Chip de estrategia */
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-copper) 35%, transparent);
+  color: var(--color-copper-deep);
+}
+
 /* Filas de tabla con elevación sutil */
 .row-lift {
   transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease;

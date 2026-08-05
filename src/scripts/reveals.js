@@ -26,33 +26,20 @@ export function initReveals() {
     );
   });
 
-  // Cards de pasos: máscara lateral con stagger
-  const stepCards = gsap.utils.toArray('[data-step-card]');
-  if (stepCards.length) {
-    gsap.fromTo(
-      stepCards,
-      { clipPath: 'inset(0 100% 0 0)' },
-      {
-        clipPath: 'inset(0 0% 0 0)',
-        duration: 1.1,
-        ease: 'power3.inOut',
-        stagger: 0.14,
-        scrollTrigger: { trigger: stepCards[0], start: 'top 82%', once: true },
-        onStart: () => {
-          stepCards.forEach((c) => {
-            const svg = c.querySelector('svg.a-draw');
-            if (svg) prepareDraw(svg);
-          });
-        },
-        onComplete: () => {
-          stepCards.forEach((c) => {
-            c.style.clipPath = 'none';
-            const svg = c.querySelector('svg.a-draw');
-            if (svg) drawIn(svg, { duration: 1.2, stagger: 0.06 });
-          });
-        },
-      }
-    );
+  // Cards de estrategia: se separan desde el centro (exprés ← · → paciente)
+  const strategyCards = gsap.utils.toArray('[data-strategy-card]');
+  if (strategyCards.length) {
+    strategyCards.forEach((card) => {
+      const dir = card.dataset.strategyCard === 'left' ? -1 : 1;
+      gsap.from(card, {
+        autoAlpha: 0,
+        x: 44 * dir,
+        scale: 0.97,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: strategyCards[0], start: 'top 78%', once: true },
+      });
+    });
   }
 
   // Data-cards de la sección tinta: elevación secuencial
@@ -97,7 +84,6 @@ export function initReveals() {
   document
     .querySelectorAll('svg.a-draw:not([data-hero-facade])')
     .forEach((svg) => {
-      if (svg.closest('[data-step-card]')) return; // ya gestionados arriba
       prepareDraw(svg);
       ScrollTrigger.create({
         trigger: svg,

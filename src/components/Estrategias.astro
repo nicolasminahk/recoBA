@@ -1,0 +1,138 @@
+---
+/**
+ * Dos estrategias sobre la misma operación: flip exprés (vender ya) y
+ * flipping paciente (rentar y vender). Compra y reforma son comunes;
+ * los retornos del exprés no se cifran — solo mecánica y plazos.
+ */
+const mailtoExpres =
+  'mailto:nicolasminahk@gmail.com?subject=Me%20interesa%20el%20flip%20expr%C3%A9s';
+const mailtoPaciente =
+  'mailto:nicolasminahk@gmail.com?subject=Me%20interesa%20el%20flipping%20paciente';
+---
+
+<section id="estrategias" class="relative overflow-hidden py-24 md:py-32">
+  <!-- Manchas de color para el glass -->
+  <div class="blob top-[20%] left-[8%] h-[26rem] w-[26rem] bg-sage/25" aria-hidden="true"></div>
+  <div class="blob right-[6%] bottom-[8%] h-[30rem] w-[30rem] bg-copper/20" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-[88rem] px-5 md:px-10">
+    <div class="grid grid-cols-12 gap-x-6">
+      <div class="col-span-12 md:col-span-6">
+        <p class="eyebrow text-copper" data-reveal>La estrategia</p>
+        <h2 class="display mt-4 text-[clamp(2.2rem,4.5vw,3.8rem)]" data-reveal>
+          Una operación,<br />dos maneras de ganar
+        </h2>
+      </div>
+      <div class="col-span-12 mt-6 md:col-span-5 md:col-start-8 md:mt-3">
+        <p class="text-lg text-ink/70" data-reveal>
+          Compramos 20–30% bajo mercado y reformamos en 6–8 meses. El final lo
+          eliges tú: vender ya, o rentar en dólares y vender mejor.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <!-- Flip exprés -->
+      <article
+        class="glass flex flex-col rounded-3xl p-8 md:p-10"
+        data-strategy-card="left"
+      >
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="eyebrow text-sage">Corto plazo</p>
+            <h3 class="display mt-2 text-[2rem]">Flip exprés</h3>
+          </div>
+          <svg class="a-draw h-14 w-14 shrink-0 text-ink" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M8 34 L28 16 L48 34" />
+            <path d="M14 30 V46 H42 V30" />
+            <path d="M24 46 V36 H32 V46" class="stroke-sage" stroke-width="2" />
+            <path d="M34 10 h14 M42 4 l6 6 -6 6" class="stroke-sage" stroke-width="2" />
+          </svg>
+        </div>
+
+        <p class="mt-4 text-[1.05rem] text-ink/75">Comprar → reformar → vender.</p>
+
+        <dl class="tnum mt-7 grid grid-cols-1 gap-5 border-t border-ink/10 pt-6 sm:grid-cols-3 sm:gap-4">
+          <div class="flex flex-col-reverse">
+            <dt class="eyebrow mt-2 text-ink/50">horizonte</dt>
+            <dd class="display text-[1.6rem] leading-none">6–12 <span class="text-[0.9rem]">meses</span></dd>
+          </div>
+          <div class="flex flex-col-reverse">
+            <dt class="eyebrow mt-2 text-ink/50">descuento en compra</dt>
+            <dd class="display text-[1.6rem] leading-none">20–30%</dd>
+          </div>
+          <div class="flex flex-col-reverse">
+            <dt class="eyebrow mt-2 text-ink/50">operativa</dt>
+            <dd class="display text-[1.6rem] leading-none">USD</dd>
+          </div>
+        </dl>
+
+        <p class="mt-6 text-[0.9rem] leading-relaxed text-ink/60">
+          El margen se crea en la compra; la fricción argentina (~12%) exige comprar
+          muy bien. Capital de vuelta en menos de un año — ideal para rotar y repetir.
+        </p>
+
+        <div class="mt-auto pt-7">
+          <a href={mailtoExpres} class="btn btn-ghost" data-magnetic>
+            Me interesa el exprés <span class="arr" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Flipping paciente -->
+      <article
+        class="glass relative flex flex-col rounded-3xl p-8 md:p-10 ring-1 ring-copper/40"
+        data-strategy-card="right"
+      >
+        <span class="eyebrow absolute -top-3 right-8 rounded-full bg-copper px-3 py-1.5 text-paper">
+          Nuestra especialidad
+        </span>
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="eyebrow text-copper">Medio plazo</p>
+            <h3 class="display mt-2 text-[2rem]">Flipping paciente</h3>
+          </div>
+          <svg class="a-draw h-14 w-14 shrink-0 text-ink" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M8 34 L28 16 L48 34" />
+            <path d="M14 30 V46 H42 V30" />
+            <path d="M24 46 V36 H32 V46" class="stroke-copper" stroke-width="2" />
+            <circle cx="43" cy="12" r="8" class="stroke-copper" stroke-width="2" />
+            <path d="M43 8 v4 l3 2" class="stroke-copper" stroke-width="2" />
+          </svg>
+        </div>
+
+        <p class="mt-4 text-[1.05rem] text-ink/75">Comprar → reformar → rentar → vender.</p>
+
+        <dl class="tnum mt-7 grid grid-cols-1 gap-5 border-t border-ink/10 pt-6 sm:grid-cols-3 sm:gap-4">
+          <div class="flex flex-col-reverse">
+            <dt class="eyebrow mt-2 text-ink/50">horizonte</dt>
+            <dd class="display text-[1.6rem] leading-none">3–5 <span class="text-[0.9rem]">años</span></dd>
+          </div>
+          <div class="flex flex-col-reverse">
+            <dt class="eyebrow mt-2 text-ink/50">preferente anual · USD</dt>
+            <dd class="display text-[1.6rem] leading-none text-copper">6%</dd>
+          </div>
+          <div class="flex flex-col-reverse">
+            <dt class="eyebrow mt-2 text-ink/50">TIR objetivo · USD</dt>
+            <dd class="display text-[1.6rem] leading-none text-copper">9–12%</dd>
+          </div>
+        </dl>
+
+        <p class="mt-6 text-[0.9rem] leading-relaxed text-ink/60">
+          La renta en dólares diluye la fricción, paga flujo trimestral y nos deja
+          vender cuando el ciclo acompaña — no cuando obliga.
+        </p>
+
+        <div class="mt-auto pt-7">
+          <a href={mailtoPaciente} class="btn btn-copper" data-magnetic>
+            Me interesa el paciente <span class="arr" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <p class="mt-8 text-center text-[0.85rem] text-ink/50" data-reveal>
+      Misma originación, misma obra, mismo operador — solo cambia la salida. <a href="#modelo" class="font-semibold text-copper hover:text-copper-deep">Ver el ciclo completo ↓</a>
+    </p>
+  </div>
+</section>
