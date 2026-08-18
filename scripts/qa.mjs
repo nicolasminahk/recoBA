@@ -1,4 +1,4 @@
-// QA funcional: animaciones, tabs, calculadora y errores de consola.
+// QA funcional: animaciones, timeline, waterfall, menú móvil y consola limpia.
 import { chromium } from 'playwright';
 
 const base = process.argv[2] ?? 'http://localhost:4321';
@@ -14,67 +14,51 @@ await page.waitForTimeout(2500);
 
 const results = {};
 
-// 1. Hero: líneas del titular visibles tras la animación
-results.heroLineY = await page.evaluate(() => {
-  const s = document.querySelector('[data-hero-title] .a-line > span');
-  return getComputedStyle(s).transform;
-});
+// 1. Hero
+results.heroLine = await page.evaluate(
+  () => getComputedStyle(document.querySelector('[data-hero-title] .a-line > span')).transform
+);
 results.heroStatsOpacity = await page.evaluate(
   () => getComputedStyle(document.querySelector('[data-hero-stats]')).opacity
 );
-results.heroCountup = await page.evaluate(
-  () => document.querySelector('[data-countup][data-to="27800"]').textContent
+results.heroCountups = await page.evaluate(() =>
+  [...document.querySelectorAll('[data-countup]')].slice(0, 6).map((e) => e.textContent)
 );
 
-// 2. Scroll al gráfico m² y comprobar barras a escala 1
-await page.locator('[data-chart-m2]').scrollIntoViewIfNeeded();
-await page.waitForTimeout(2000);
-results.m2BarScale = await page.evaluate(() => {
-  const b = document.querySelector('[data-chart-m2] [data-bar]');
-  return getComputedStyle(b).transform;
-});
-
-// 3. Timeline pin: la sección modelo genera pin-spacer
-await page.locator('#modelo').scrollIntoViewIfNeeded();
-await page.waitForTimeout(500);
+// 2. Timeline del proceso: pin activo
+await page.locator('#proceso').scrollIntoViewIfNeeded();
+await page.waitForTimeout(700);
 results.pinSpacer = await page.evaluate(() => !!document.querySelector('.pin-spacer'));
 
-// 4. Waterfall del caso visible
-await page.locator('[data-chart-waterfall]').first().scrollIntoViewIfNeeded();
-await page.waitForTimeout(2000);
-results.wfSegScale = await page.evaluate(() => {
-  const s = document.querySelector('[data-panel="camargo"] [data-wf-seg]');
-  return getComputedStyle(s).transform;
-});
-
-// 5. Tabs: cambiar a Recoleta
-await page.click('[data-tab="recoleta"]');
-await page.waitForTimeout(1600);
-results.tabRecoletaVisible = await page.evaluate(() => {
-  const p = document.querySelector('[data-panel="recoleta"]');
-  return !p.classList.contains('hidden') && getComputedStyle(p).opacity === '1';
-});
-results.tabCamargoHidden = await page.evaluate(() =>
-  document.querySelector('[data-panel="camargo"]').classList.contains('hidden')
-);
-results.wfRecoletaTotal = await page.evaluate(() =>
-  [...document.querySelectorAll('[data-panel="recoleta"] [data-wf-label]')].at(-1)?.textContent.trim()
+// 3. Gráfico m²
+await page.locator('[data-chart-m2]').scrollIntoViewIfNeeded();
+await page.waitForTimeout(1800);
+results.m2BarScale = await page.evaluate(
+  () => getComputedStyle(document.querySelector('[data-chart-m2] [data-bar]')).transform
 );
 
-// 6. Calculadora
-await page.locator('#co-inversion').scrollIntoViewIfNeeded();
-await page.waitForTimeout(800);
-await page.locator('#calc-ticket').fill('50000');
-await page.click('[data-esc="2"]');
-await page.waitForTimeout(900);
-results.calc50kOptimista = await page.evaluate(() => ({
-  ticket: document.getElementById('calc-ticket-out').textContent,
-  pref: document.getElementById('calc-pref').textContent,
-  prefAcum: document.getElementById('calc-pref-acum').textContent,
-  plus: document.getElementById('calc-plus').textContent,
-  total: document.getElementById('calc-total').textContent,
-  cobertura: document.getElementById('calc-cobertura').textContent.slice(0, 40),
+// 4. Waterfall del caso
+await page.locator('[data-chart-waterfall]').scrollIntoViewIfNeeded();
+await page.waitForTimeout(1800);
+results.wfSegScale = await page.evaluate(
+  () => getComputedStyle(document.querySelector('[data-wf-seg]')).transform
+);
+results.wfTotal = await page.evaluate(() =>
+  [...document.querySelectorAll('[data-wf-label]')].at(-1)?.textContent.trim()
+);
+
+// 5. Herramientas visibles
+await page.locator('#herramientas').scrollIntoViewIfNeeded();
+await page.waitForTimeout(1500);
+results.toolCards = await page.evaluate(() => ({
+  count: document.querySelectorAll('[data-tool-card]').length,
+  firstOpacity: getComputedStyle(document.querySelector('[data-tool-card]')).opacity,
 }));
+
+// 6. Secciones presentes / eliminadas
+results.sections = await page.evaluate(() =>
+  [...document.querySelectorAll('main > section')].map((s) => s.id)
+);
 
 // 7. Menú móvil
 const mob = await browser.newPage({ viewport: { width: 390, height: 844 } });
@@ -84,9 +68,12 @@ results.mobileMenuOpen = await mob.evaluate(
   () => !document.getElementById('mobile-menu').classList.contains('hidden')
 );
 await mob.click('[data-menu-link]');
-await mob.waitForTimeout(600);
-results.mobileMenuClosesOnClick = await mob.evaluate(() =>
+await mob.waitForTimeout(500);
+results.mobileMenuCloses = await mob.evaluate(() =>
   document.getElementById('mobile-menu').classList.contains('hidden')
+);
+results.mobileOverflowX = await mob.evaluate(
+  () => document.documentElement.scrollWidth > window.innerWidth
 );
 
 results.consoleErrors = errors;

@@ -9,15 +9,14 @@ const ciudades = [
 ];
 
 const cards = [
-  { dato: '12–33%', label: 'bajo el pico de 2018 · +5,4% i.a. 2025' },
   { dato: '69.461', label: 'escrituras CABA 2025 · +26,8%, mejor año en dos décadas' },
   { dato: '30–37%', label: 'brecha récord usado vs. a estrenar: el arbitraje' },
+  { dato: '12–33%', label: 'bajo el pico de 2018 · +5,4% i.a. 2025' },
   {
     dato: '0%',
-    label: 'reforma fiscal 2026: venta y alquiler exentos',
+    label: 'reforma fiscal 2026: venta exenta del cedular',
     link: { href: '#riesgos', label: 'Es reversible → riesgos' },
   },
-  { dato: '#1', label: 'de Latam para nómadas digitales' },
 ];
 ---
 
@@ -32,8 +31,8 @@ const cards = [
           ¿Por qué Buenos Aires?<br />¿Por qué ahora?
         </h2>
         <p class="mt-6 max-w-[30rem] text-paper/65" data-reveal>
-          Servicios de ciudad europea, a una fracción del m² europeo — saliendo de su
-          ciclo bajista más largo.
+          El m² más barato de las grandes capitales, un mercado que volvió a
+          transaccionar y una brecha récord entre usado y a estrenar.
         </p>
       </div>
 
@@ -99,7 +98,7 @@ const cards = [
     </div>
 
     <!-- Data cards -->
-    <div class="mt-20 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-paper/12 bg-paper/12 sm:grid-cols-2 lg:grid-cols-5">
+    <div class="mt-20 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-paper/12 bg-paper/12 sm:grid-cols-2 lg:grid-cols-4">
       {
         cards.map((c) => (
           <article class="group flex flex-col bg-ink p-7" data-data-card>

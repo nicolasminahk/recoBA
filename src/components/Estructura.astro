@@ -1,0 +1,65 @@
+---
+const pilares = [
+  {
+    titulo: 'Fideicomiso',
+    texto: 'Fiduciario profesional y patrimonio separado: el estándar argentino.',
+    icon: 'shield',
+  },
+  {
+    titulo: 'Invierte sin viajar',
+    texto: 'Poder apostillado y CDI/CUIT vía apoderado. Todo a distancia.',
+    icon: 'plane',
+  },
+  {
+    titulo: '3–5 co-inversores',
+    texto: 'Grupos pequeños: sabes en qué piso inviertes y con quién.',
+    icon: 'group',
+  },
+];
+---
+
+<section id="estructura" class="relative py-20 md:py-24">
+  <div class="mx-auto max-w-[88rem] px-5 md:px-10">
+    <div class="grid grid-cols-12 gap-x-6 gap-y-8">
+      <div class="col-span-12 lg:col-span-3">
+        <p class="eyebrow text-copper" data-reveal>Cómo se estructura</p>
+        <h2 class="display mt-3 text-[clamp(1.7rem,2.6vw,2.2rem)]" data-reveal>
+          Un activo real,<br />a tu nombre
+        </h2>
+      </div>
+
+      <div class="col-span-12 grid grid-cols-1 gap-6 sm:grid-cols-3 lg:col-span-9">
+        {
+          pilares.map((p) => (
+            <article class="flex items-start gap-4" data-reveal>
+              {p.icon === 'shield' && (
+                <svg class="a-draw h-9 w-9 shrink-0 text-copper" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M22 4 L38 10 V22 C38 32 30 38 22 40 C14 38 6 32 6 22 V10 Z" />
+                  <path d="M15 22 L20 27 L30 17" />
+                </svg>
+              )}
+              {p.icon === 'plane' && (
+                <svg class="a-draw h-9 w-9 shrink-0 text-copper" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M4 26 L40 12 L30 40 L22 30 Z" />
+                  <line x1="40" y1="12" x2="22" y2="30" />
+                </svg>
+              )}
+              {p.icon === 'group' && (
+                <svg class="a-draw h-9 w-9 shrink-0 text-copper" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <circle cx="15" cy="15" r="6" />
+                  <circle cx="31" cy="17" r="5" />
+                  <path d="M5 37 C5 29 11 26 15 26 C19 26 25 29 25 37" />
+                  <path d="M27 34 C28 28 31 27 31 27 C34 27 39 29 39 35" />
+                </svg>
+              )}
+              <div>
+                <h3 class="display text-lg">{p.titulo}</h3>
+                <p class="mt-1.5 text-[0.9rem] leading-relaxed text-ink/65">{p.texto}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

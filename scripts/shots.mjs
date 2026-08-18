@@ -9,14 +9,13 @@ mkdirSync(outDir, { recursive: true });
 
 const sections = [
   ['hero', '#top'],
-  ['estrategias', '#estrategias'],
+  ['proceso', '#proceso'],
   ['por-que-ahora', '#por-que-ahora'],
-  ['modelo', '#modelo'],
-  ['casos', '#casos'],
-  ['co-inversion', '#co-inversion'],
-  ['compara', '#compara'],
+  ['caso', '#caso'],
+  ['estructura', '#estructura'],
+  ['herramientas', '#herramientas'],
   ['riesgos', '#riesgos'],
-  ['roadmap', '#hoja-de-ruta'],
+  ['cta', '#hablemos'],
   ['footer', 'footer'],
 ];
 

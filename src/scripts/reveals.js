@@ -26,19 +26,17 @@ export function initReveals() {
     );
   });
 
-  // Cards de estrategia: se separan desde el centro (exprés ← · → paciente)
-  const strategyCards = gsap.utils.toArray('[data-strategy-card]');
-  if (strategyCards.length) {
-    strategyCards.forEach((card) => {
-      const dir = card.dataset.strategyCard === 'left' ? -1 : 1;
-      gsap.from(card, {
-        autoAlpha: 0,
-        x: 44 * dir,
-        scale: 0.97,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: strategyCards[0], start: 'top 78%', once: true },
-      });
+  // Cards de herramientas: entran escalonadas con leve elevación
+  const toolCards = gsap.utils.toArray('[data-tool-card]');
+  if (toolCards.length) {
+    gsap.from(toolCards, {
+      autoAlpha: 0,
+      y: 36,
+      scale: 0.98,
+      duration: 0.95,
+      ease: 'power3.out',
+      stagger: 0.12,
+      scrollTrigger: { trigger: toolCards[0], start: 'top 82%', once: true },
     });
   }
 
@@ -55,32 +53,21 @@ export function initReveals() {
     });
   }
 
-  // Cards de riesgo: entran alternando dirección
+  // Cards de riesgo: entran escalonadas (sin desplazamiento lateral, que
+  // provocaba overflow horizontal transitorio en móvil)
   const riskCards = gsap.utils.toArray('[data-riesgo-card]');
-  riskCards.forEach((el, i) => {
-    gsap.from(el, {
+  if (riskCards.length) {
+    gsap.from(riskCards, {
       autoAlpha: 0,
-      x: i % 2 ? 32 : -32,
+      y: 30,
       duration: 0.9,
       ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-    });
-  });
-
-  // Pasos de la cascada: se apilan de arriba hacia abajo
-  const cascada = gsap.utils.toArray('[data-cascada-step]');
-  if (cascada.length) {
-    gsap.from(cascada, {
-      autoAlpha: 0,
-      y: 40,
-      duration: 0.85,
-      ease: 'power3.out',
-      stagger: 0.18,
-      scrollTrigger: { trigger: '[data-cascada]', start: 'top 80%', once: true },
+      stagger: 0.1,
+      scrollTrigger: { trigger: riskCards[0], start: 'top 86%', once: true },
     });
   }
 
-  // SVGs sueltos que se dibujan al entrar (plano, arco del CTA, iconos co-inversión)
+  // SVGs sueltos que se dibujan al entrar (plano, arco del CTA, iconos)
   document
     .querySelectorAll('svg.a-draw:not([data-hero-facade])')
     .forEach((svg) => {

@@ -1,57 +1,64 @@
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 /**
- * Diagrama del ciclo con bifurcación (desktop): el tronco común se dibuja,
- * los hitos aparecen y las dos ramas (exprés y paciente) se trazan a la vez
- * con pin + scrub. En móvil la versión vertical usa los reveals genéricos.
+ * Línea del proceso: se traza con scrub mientras los pasos se activan en
+ * secuencia. Desktop: horizontal con pin. Móvil: vertical sin pin.
  */
 export function initTimeline(mm) {
-  const wrap = document.querySelector('[data-fork]');
+  const wrap = document.querySelector('[data-proceso]');
   if (!wrap) return;
 
+  const progress = wrap.querySelector('[data-proceso-progress]');
+  const steps = gsap.utils.toArray('[data-proceso-step]', wrap);
+  const dots = gsap.utils.toArray('[data-proceso-dot]', wrap);
+
   mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
-    const trunk = wrap.querySelector('[data-fork-trunk]');
-    const expres = wrap.querySelector('[data-fork-expres]');
-    const paciente = wrap.querySelector('[data-fork-paciente]');
-    const nodes = gsap.utils.toArray('[data-fork-node]', wrap);
-    const nodesE = gsap.utils.toArray('[data-fork-node-e]', wrap);
-    const nodesP = gsap.utils.toArray('[data-fork-node-p]', wrap);
-
-    [trunk, expres, paciente].forEach((p) => {
-      const len = p.getTotalLength();
-      p.style.strokeDasharray = `${len}`;
-      p.style.strokeDashoffset = `${len}`;
-    });
-    gsap.set([...nodes, ...nodesE, ...nodesP], {
-      autoAlpha: 0,
-      y: 12,
-      transformOrigin: 'center center',
-    });
-
+    gsap.set(steps, { autoAlpha: 0.25, y: 16 });
     const tl = gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: {
         trigger: wrap,
-        start: 'center 60%',
-        end: '+=1100',
+        start: 'center 62%',
+        end: '+=900',
         pin: true,
         scrub: 0.6,
       },
     });
-
-    tl.to(trunk, { strokeDashoffset: 0, duration: 2.2 }, 0)
-      .to(nodes[0], { autoAlpha: 1, y: 0, duration: 0.5 }, 0.1)
-      .to(nodes[1], { autoAlpha: 1, y: 0, duration: 0.5 }, 1.1)
-      .to(nodes[2], { autoAlpha: 1, y: 0, duration: 0.5 }, 2.1)
-      // las dos ramas se dibujan en paralelo: la decisión, visualizada
-      .to([expres, paciente], { strokeDashoffset: 0, duration: 3 }, 2.5)
-      .to(nodesE[0], { autoAlpha: 1, y: 0, duration: 0.5 }, 3.6)
-      .to(nodesP[0], { autoAlpha: 1, y: 0, duration: 0.5 }, 3.8)
-      .to(nodesP[1], { autoAlpha: 1, y: 0, duration: 0.5 }, 4.6)
-      .to(nodesE[1], { autoAlpha: 1, y: 0, duration: 0.5 }, 5.0)
-      .to(nodesP[2], { autoAlpha: 1, y: 0, duration: 0.5 }, 5.2);
-
+    tl.fromTo(progress, { scaleX: 0 }, { scaleX: 1, duration: 4 }, 0);
+    steps.forEach((step, i) => {
+      tl.to(step, { autoAlpha: 1, y: 0, duration: 0.6 }, i * 0.95 + 0.15);
+      tl.to(
+        dots[i],
+        { backgroundColor: '#C2603D', borderColor: '#C2603D', duration: 0.25 },
+        i * 0.95 + 0.15
+      );
+    });
     return () => tl.scrollTrigger?.kill();
+  });
+
+  mm.add('(max-width: 1023px) and (prefers-reduced-motion: no-preference)', () => {
+    const st = gsap.fromTo(
+      progress,
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        ease: 'none',
+        scrollTrigger: { trigger: wrap, start: 'top 70%', end: 'bottom 60%', scrub: 0.6 },
+      }
+    );
+    steps.forEach((step, i) => {
+      gsap.from(step, {
+        autoAlpha: 0,
+        y: 26,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: step, start: 'top 85%', once: true },
+        onComplete: () => {
+          dots[i]?.style.setProperty('background-color', '#C2603D');
+          dots[i]?.style.setProperty('border-color', '#C2603D');
+        },
+      });
+    });
+    return () => st.scrollTrigger?.kill();
   });
 }
