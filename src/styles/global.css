@@ -153,12 +153,21 @@ body {
   background-position: 0 96%;
 }
 
-/* Placeholder documentado para fotografía real de obra */
-.ph {
-  background:
-    repeating-linear-gradient(-45deg, transparent 0 10px, color-mix(in srgb, var(--color-ink) 4%, transparent) 10px 11px),
-    var(--color-paper-2);
-  border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+/* Enlace de salto al contenido (solo visible con foco de teclado) */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.skip-link:focus-visible {
+  top: 1rem;
 }
 
 /* Botones */
@@ -225,32 +234,6 @@ body {
   filter: blur(90px);
   pointer-events: none;
   will-change: transform;
-}
-
-/* Chip de estrategia */
-.tag-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 0.4rem 0.85rem;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--color-copper) 35%, transparent);
-  color: var(--color-copper-deep);
-}
-
-/* Filas de tabla con elevación sutil */
-.row-lift {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease;
-}
-@media (hover: hover) {
-  .row-lift:hover {
-    transform: translateY(-2px);
-    background-color: color-mix(in srgb, var(--color-copper) 6%, transparent);
-  }
 }
 
 /* ------------------------------------------------- estados de animación */

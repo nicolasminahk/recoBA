@@ -1,13 +1,13 @@
 ---
+import { MAILTO_DEMO } from '../data/site.js';
+
 const links = [
-  { href: '#proceso', label: 'Cómo funciona' },
-  { href: '#por-que-ahora', label: 'Por qué ahora' },
-  { href: '#caso', label: 'La operación' },
-  { href: '#herramientas', label: 'Herramientas' },
-  { href: '#riesgos', label: 'Riesgos' },
+  { href: '#producto', label: 'Producto' },
+  { href: '#como-funciona', label: 'Cómo funciona' },
+  { href: '#para-quien', label: 'Para quién' },
+  { href: '#precios', label: 'Precios' },
+  { href: '#preguntas', label: 'Preguntas' },
 ];
-const mailto =
-  'mailto:nicolasminahk@gmail.com?subject=Quiero%20saber%20m%C3%A1s%20sobre%20recoBA';
 ---
 
 <header
@@ -51,8 +51,8 @@ const mailto =
     </ul>
 
     <div class="flex items-center gap-3">
-      <a href={mailto} class="btn btn-copper !px-5 !py-2.5 text-[0.88rem]" data-magnetic>
-        Hablemos <span class="arr" aria-hidden="true">→</span>
+      <a href={MAILTO_DEMO} class="btn btn-copper max-sm:!hidden !px-5 !py-2.5 text-[0.88rem] whitespace-nowrap" data-magnetic>
+        Pedir una demo <span class="arr" aria-hidden="true">→</span>
       </a>
       <button
         id="menu-btn"
@@ -89,5 +89,8 @@ const mailto =
         ))
       }
     </ul>
+    <a href={MAILTO_DEMO} class="btn btn-copper mt-5 w-full justify-center sm:hidden" data-menu-link>
+      Pedir una demo <span class="arr" aria-hidden="true">→</span>
+    </a>
   </div>
 </header>
