@@ -23,5 +23,7 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# artefactos locales
-shots/
+# artefactos locales (raíz del repo)
+/shots/
+# capturas de QA (npm run qa)
+/qa/
