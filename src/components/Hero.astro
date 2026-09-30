@@ -1,7 +1,6 @@
 ---
-import Shot from './Shot.astro';
+import HeroScene from './HeroScene.astro';
 import { MAILTO_DEMO, DEMO_PORTAL } from '../data/site.js';
-import adminObras from '../assets/shots/admin-obras.png';
 ---
 
 <section id="top" class="relative overflow-hidden pt-[6.5rem] pb-10 md:pt-[8rem] md:pb-16">
@@ -35,15 +34,8 @@ import adminObras from '../assets/shots/admin-obras.png';
       </div>
     </div>
 
-    <div class="a-fade mx-auto mt-12 max-w-[72rem] md:mt-16" data-hero-shot>
-      <Shot
-        src={adminObras}
-        domain="gestion.recoba.casa/admin"
-        eager
-        sizes="(min-width: 1200px) 1152px, calc(100vw - 2.5rem)"
-        widths={[640, 960, 1280, 1800, 2304]}
-        alt="Panel de administración de recoBA: listado de obras con obras en curso, capital de inversores, pendientes de revisar, bandeja de entrada de correo y avisos que requieren atención"
-      />
+    <div class="mt-10 md:mt-12">
+      <HeroScene />
     </div>
   </div>
 </section>
