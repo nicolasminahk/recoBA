@@ -4,14 +4,29 @@
     {
       "name": "recova-web",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 4321
     },
     {
       "name": "portal-recoba",
       "runtimeExecutable": "sh",
-      "runtimeArgs": ["-c", "cd /private/tmp/claude-501/-Users-s333ma-Documents-claude-code-recova/d0d36a49-6807-40fe-a029-74741e23a1c1/scratchpad/serve && exec python3 -m http.server 4173"],
+      "runtimeArgs": [
+        "-c",
+        "cd /private/tmp/claude-501/-Users-s333ma-Documents-claude-code-recova/d0d36a49-6807-40fe-a029-74741e23a1c1/scratchpad/serve && exec python3 -m http.server 4173"
+      ],
       "port": 4173
+    },
+    {
+      "name": "radar-dev",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "cd /Users/s333ma/Documents/House-Fliping/radar-recoba && POSTGRES_URL= exec npm run dev"
+      ],
+      "port": 3000
     }
   ]
 }

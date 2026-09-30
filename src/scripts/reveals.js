@@ -33,10 +33,13 @@ export function initReveals() {
       autoAlpha: 0,
       y: 36,
       scale: 0.98,
-      duration: 0.95,
+      duration: 0.7,
       ease: 'power3.out',
-      stagger: 0.12,
+      stagger: 0.08,
       scrollTrigger: { trigger: toolCards[0], start: 'top 82%', once: true },
+      // Al terminar, sin estilos inline residuales: si algo interrumpe el
+      // timeline, ninguna card queda semitransparente o desplazada.
+      clearProps: 'all',
     });
   }
 
