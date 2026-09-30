@@ -1,9 +1,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { initHero } from './hero.js';
-import { initReveals, initCountups } from './reveals.js';
-import { initCharts } from './charts.js';
-import { initTimeline } from './timeline.js';
+import { initReveals } from './reveals.js';
 import { initNav, initMagnetic } from './interactions.js';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,11 +12,7 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
 initNav();
 
 if (!reducedMotion) {
-  const mm = gsap.matchMedia();
   initHero();
   initReveals();
-  initCountups();
-  initCharts();
-  initTimeline(mm);
   initMagnetic();
 }

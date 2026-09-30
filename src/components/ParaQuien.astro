@@ -1,0 +1,47 @@
+---
+const perfiles = [
+  {
+    titulo: 'Promotoras con inversores privados',
+    texto: 'Varias promociones en marcha y un grupo de inversores que quiere ver cómo va cada una.',
+  },
+  {
+    titulo: 'Empresas de compra-reforma-venta',
+    texto: 'Obras cortas, muchas facturas y capital de terceros en cada operación.',
+  },
+  {
+    titulo: 'Gestoras y family offices con club deals',
+    texto: 'Reporting periódico a partícipes que hoy se prepara a mano para cada vehículo.',
+  },
+  {
+    titulo: 'Plataformas y vehículos de coinversión',
+    texto: 'Muchos inversores por obra y la necesidad de que cada uno vea solo lo suyo.',
+  },
+];
+---
+
+<section id="para-quien" class="relative py-20 md:py-28">
+  <div class="mx-auto max-w-[88rem] px-5 md:px-10">
+    <div class="grid grid-cols-12 gap-x-6 gap-y-8">
+      <div class="col-span-12 lg:col-span-4">
+        <p class="eyebrow text-copper" data-reveal>Para quién</p>
+        <h2 class="display mt-4 text-[clamp(1.9rem,3.4vw,2.9rem)]" data-reveal>
+          Empresas que reportan a inversores privados.
+        </h2>
+        <p class="mt-5 text-[1.05rem] text-ink/70" data-reveal>
+          Y que hoy lo hacen con WhatsApp, Excel, correo y Drive.
+        </p>
+      </div>
+
+      <div class="col-span-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:col-span-8">
+        {
+          perfiles.map((p) => (
+            <article class="glass rounded-2xl p-7" data-card>
+              <h3 class="display text-xl">{p.titulo}</h3>
+              <p class="mt-2.5 text-[0.92rem] leading-relaxed text-ink/65">{p.texto}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

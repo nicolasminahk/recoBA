@@ -1,0 +1,121 @@
+---
+import { DEMO_PORTAL, DEMO_ADMIN } from '../data/site.js';
+
+const preguntas = [
+  {
+    q: '¿Sustituye a nuestro ERP o programa de gestión?',
+    a: 'No. Recoge lo que ya circula sobre cada obra y se lo muestra a quien tiene que verlo.',
+  },
+  {
+    q: '¿Tenemos que pagar una cuota mensual?',
+    a: 'No. Es una licencia perpetua; solo paga la infraestructura directamente a cada proveedor (aprox. 50–80 € al mes) y, si quiere, el mantenimiento.',
+  },
+  {
+    q: '¿Dónde están los datos?',
+    a: 'En sus propias cuentas, alojados en la UE, exportables cuando quiera.',
+  },
+  {
+    q: '¿Qué pasa si dejamos de contratar el mantenimiento?',
+    a: 'La plataforma sigue funcionando y sigue siendo suya.',
+  },
+  {
+    q: '¿Cómo entran los inversores?',
+    a: 'Con su cuenta de Google o con un enlace por correo, solo si han sido invitados.',
+  },
+  {
+    q: '¿Cuánto tarda la puesta en marcha?',
+    a: 'El diagnóstico dura dos semanas; el calendario de instalación se cierra en él.',
+  },
+  {
+    q: '¿Podemos verlo antes?',
+    a: null, // respuesta con enlaces, se escribe abajo
+  },
+];
+---
+
+<section id="preguntas" class="relative py-20 md:py-28">
+  <div class="mx-auto max-w-[88rem] px-5 md:px-10">
+    <div class="grid grid-cols-12 gap-x-6 gap-y-10">
+      <div class="col-span-12 lg:col-span-4">
+        <p class="eyebrow text-copper" data-reveal>Preguntas frecuentes</p>
+        <h2 class="display mt-4 text-[clamp(1.9rem,3.4vw,2.9rem)]" data-reveal>
+          Lo que suelen preguntarnos antes de la demo.
+        </h2>
+      </div>
+
+      <div class="col-span-12 lg:col-span-7 lg:col-start-6">
+        <div class="border-t border-ink/15">
+          {
+            preguntas.map((p) => (
+              <details class="faq group border-b border-ink/15">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left font-display text-lg font-medium">
+                  {p.q}
+                  <span class="faq-icon" aria-hidden="true" />
+                </summary>
+                <div class="pb-6 pr-10 text-[0.95rem] leading-relaxed text-ink/70">
+                  {p.a ?? (
+                    <p>
+                      Sí: las demos navegables están en{' '}
+                      <a href={DEMO_PORTAL} target="_blank" rel="noopener" class="u-copper hover:text-copper">
+                        gestion.recoba.casa
+                      </a>{' '}
+                      y{' '}
+                      <a href={DEMO_ADMIN} target="_blank" rel="noopener" class="u-copper hover:text-copper">
+                        gestion.recoba.casa/admin
+                      </a>
+                      , con datos de ejemplo.
+                    </p>
+                  )}
+                </div>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq summary:focus-visible {
+    outline: 2px solid var(--color-copper);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+  .faq-icon {
+    position: relative;
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 25%, transparent);
+    transition: border-color 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .faq-icon::before,
+  .faq-icon::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0.65rem;
+    height: 1.5px;
+    background: var(--color-ink);
+    transform: translate(-50%, -50%);
+  }
+  .faq-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .faq[open] .faq-icon {
+    border-color: var(--color-copper);
+  }
+  .faq[open] .faq-icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  .faq summary:hover .faq-icon {
+    border-color: var(--color-copper);
+  }
+</style>

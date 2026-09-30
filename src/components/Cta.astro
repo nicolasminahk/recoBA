@@ -1,39 +1,77 @@
 ---
-const mailto =
-  'mailto:nicolasminahk@gmail.com?subject=Quiero%20saber%20m%C3%A1s%20sobre%20recoBA';
+import { MAILTO_DEMO, EMAIL, DEMO_PORTAL, DEMO_ADMIN } from '../data/site.js';
+
+const pasos = [
+  ['Demo de 30 minutos', 'En remoto o en su oficina de Madrid, Valencia o Málaga.'],
+  ['Diagnóstico de dos semanas', 'Perfiles, obras, partidas y documentos. Alcance y calendario cerrados.'],
+  ['Instalación con sus obras', 'En sus cuentas, con su marca. Sus inversores dentro.'],
+];
 ---
 
-<section id="hablemos" class="relative py-20 md:py-28">
+<section id="demo" class="relative py-20 md:py-28">
   <div class="mx-auto max-w-[88rem] px-5 md:px-10">
     <div
-      class="relative overflow-hidden rounded-3xl bg-ink px-8 py-16 text-center text-paper md:py-20"
+      class="relative overflow-hidden rounded-3xl bg-ink px-6 py-14 text-paper md:px-14 md:py-20"
       data-reveal
     >
       <div class="pointer-events-none absolute inset-0 techgrid-dark" aria-hidden="true"></div>
-      <svg
-        class="a-draw relative mx-auto h-14 w-14 text-copper"
-        viewBox="0 0 64 64"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        aria-hidden="true"
-      >
-        <path d="M16 52 V34 a16 16 0 0 1 32 0 V52" />
-        <line x1="10" y1="52" x2="54" y2="52" />
-      </svg>
-      <h2 class="display relative mx-auto mt-6 max-w-[34rem] text-[clamp(2.2rem,5vw,4rem)]">
-        ¿Hablamos?
-      </h2>
-      <p class="relative mx-auto mt-5 max-w-[32rem] text-lg text-paper/70">
-        Treinta minutos con los números delante. Estamos cerrando la operación
-        piloto de 2026.
-      </p>
-      <div class="relative mt-9">
-        <a href={mailto} class="btn btn-copper !px-8 !py-4 text-base" data-magnetic>
-          Agenda una llamada <span class="arr" aria-hidden="true">→</span>
-        </a>
+      <div class="blob top-[-20%] right-[-5%] h-[26rem] w-[26rem] bg-copper/25" aria-hidden="true"></div>
+
+      <div class="relative grid grid-cols-12 gap-x-6 gap-y-10">
+        <div class="col-span-12 lg:col-span-6">
+          <svg
+            class="a-draw h-12 w-12 text-copper"
+            viewBox="0 0 64 64"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path d="M16 52 V34 a16 16 0 0 1 32 0 V52" />
+            <line x1="10" y1="52" x2="54" y2="52" />
+          </svg>
+          <h2 class="display mt-6 max-w-[30rem] text-[clamp(2rem,4.2vw,3.6rem)]">
+            Lo mejor es verlo funcionando con una obra suya.
+          </h2>
+
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href={MAILTO_DEMO} class="btn btn-copper !px-8 !py-4 text-base" data-magnetic>
+              Pedir una demo <span class="arr" aria-hidden="true">→</span>
+            </a>
+          </div>
+          <p class="mt-4 text-[0.9rem] text-paper/60">
+            O escriba directamente a{' '}
+            <a href={`mailto:${EMAIL}`} class="select-all font-medium text-paper hover:text-copper">{EMAIL}</a>
+          </p>
+
+          <p class="mt-8 text-[0.85rem] text-paper/50">
+            Demos navegables con datos de ejemplo:
+            <a href={DEMO_PORTAL} target="_blank" rel="noopener" class="ml-1 text-paper/80 hover:text-copper"
+              >portal del inversor <span aria-hidden="true">↗</span></a
+            >
+            <span class="mx-1.5" aria-hidden="true">·</span>
+            <a href={DEMO_ADMIN} target="_blank" rel="noopener" class="text-paper/80 hover:text-copper"
+              >panel de administración <span aria-hidden="true">↗</span></a
+            >
+          </p>
+        </div>
+
+        <ol class="col-span-12 lg:col-span-5 lg:col-start-8">
+          {
+            pasos.map(([t, d], i) => (
+              <li class="grid grid-cols-[2.5rem_1fr] gap-4 border-t border-paper/15 py-5 first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-5">
+                <span class="display tnum text-xl text-copper" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3 class="display text-lg">{t}</h3>
+                  <p class="mt-1.5 text-[0.9rem] leading-relaxed text-paper/60">{d}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
       </div>
-      <p class="relative mt-5 text-[0.85rem] text-paper/45">nicolasminahk@gmail.com</p>
     </div>
   </div>
 </section>
