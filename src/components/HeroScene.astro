@@ -106,15 +106,19 @@ const pic = {
   .stage {
     position: relative;
     margin-inline: auto;
-    max-width: 66rem;
-    padding: 2rem 0 0;
+    max-width: 56rem;
+    padding: 1.25rem 0 0;
     perspective: 1800px;
     perspective-origin: 50% 30%;
   }
   .stage-tilt {
     transform-style: preserve-3d;
-    /* Inclinación estática (sin JS): la misma con la que arranca la animación */
-    transform: rotateX(14deg) rotateY(-9deg);
+    /* Inclinación estática (sin JS): la misma con la que arranca la animación.
+       En escritorio la escena va a la derecha del texto y gira hacia él. */
+    transform: rotateX(12deg) rotateY(10deg);
+  }
+  @media (min-width: 1024px) {
+    .stage { max-width: none; padding: 2.5rem 2rem 0 1.5rem; }
   }
   .stage-inner {
     position: relative;
@@ -124,6 +128,9 @@ const pic = {
     transform-style: preserve-3d;
   }
   .layer-base {
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 16 / 8.6;
     overflow: hidden;
     border-radius: 0.9rem;
     background: #fff;
@@ -131,6 +138,17 @@ const pic = {
     box-shadow:
       0 1px 2px color-mix(in srgb, var(--color-ink) 6%, transparent),
       0 40px 90px -30px color-mix(in srgb, var(--color-ink) 45%, transparent);
+  }
+  /* La captura original es casi cuadrada: se recorta por abajo para que la
+     escena quede apaisada y entre en una vista */
+  .layer-base :global(picture) {
+    flex: 1;
+    min-height: 0;
+  }
+  .layer-base :global(img) {
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
   }
   .shot-bar {
     display: flex;
@@ -197,13 +215,13 @@ const pic = {
     50% { box-shadow: 0 0 0 5px transparent; }
   }
 
-  .card-cartera { --z: 90px; left: -6%; bottom: 14%; width: 54%; }
-  .card-atencion { --z: 70px; right: -7%; top: -5%; width: 32%; }
-  .card-camara { --z: 80px; right: -4%; bottom: -9%; width: 33%; }
-  .card-movil { --z: 120px; left: 3%; top: -6%; width: 16%; }
+  .card-cartera { --z: 90px; left: -7%; bottom: 8%; width: 54%; }
+  .card-atencion { --z: 70px; right: -3%; top: -8%; width: 31%; }
+  .card-camara { --z: 80px; right: -2%; bottom: -12%; width: 32%; }
+  .card-movil { --z: 120px; left: 2%; top: -9%; width: 14%; }
 
   .stage-caption {
-    margin-top: 2.5rem;
+    margin-top: 3.25rem;
     text-align: center;
     font-size: 0.74rem;
     letter-spacing: 0.04em;
@@ -212,14 +230,16 @@ const pic = {
 
   @media (max-width: 1023px) {
     .stage { perspective: 1400px; }
+    .layer-base { aspect-ratio: 16 / 9.5; }
     .stage-tilt { transform: rotateX(10deg) rotateY(-6deg); }
-    .card-cartera { width: 62%; left: -4%; bottom: 10%; }
-    .card-atencion { width: 40%; right: -5%; top: 8%; }
+    .card-cartera { width: 62%; left: 0; bottom: 8%; }
+    .card-atencion { width: 40%; right: 0; top: -6%; }
     .card-camara { display: none; }
     .card-movil { width: 20%; left: 2%; top: -4%; }
   }
   @media (max-width: 639px) {
     .stage { padding-top: 1rem; }
+    .layer-base { aspect-ratio: 16 / 11; }
     .stage-tilt { transform: rotateX(8deg) rotateY(-3deg); }
     .card-atencion { display: none; }
     .card-cartera { width: 76%; left: 1%; bottom: 8%; }

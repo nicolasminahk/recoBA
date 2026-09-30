@@ -32,7 +32,7 @@ function initScene(tl) {
   // Inclinación inicial = la del CSS en cada ancho, para que no haya salto
   const mq = (q) => window.matchMedia(q).matches;
   const REST = mq('(min-width: 1024px)')
-    ? { rotateX: 14, rotateY: -9 }
+    ? { rotateX: 12, rotateY: 10 }
     : mq('(min-width: 640px)')
       ? { rotateX: 10, rotateY: -6 }
       : { rotateX: 8, rotateY: -3 };
@@ -67,7 +67,7 @@ function initScene(tl) {
   // Se aplana al hacer scroll: de la inclinación de reposo a casi frontal
   gsap.to(tilt, {
     rotateX: 3,
-    rotateY: -2,
+    rotateY: REST.rotateY > 0 ? 2 : -2,
     ease: 'none',
     scrollTrigger: { trigger: stage, start: 'top 80%', end: 'bottom 20%', scrub: 0.6 },
   });

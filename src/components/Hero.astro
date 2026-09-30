@@ -3,28 +3,29 @@ import HeroScene from './HeroScene.astro';
 import { MAILTO_DEMO, DEMO_PORTAL } from '../data/site.js';
 ---
 
-<section id="top" class="relative overflow-hidden pt-[6.5rem] pb-10 md:pt-[8rem] md:pb-16">
+<section id="top" class="relative overflow-hidden pt-[6rem] pb-8 md:pt-[7rem] md:pb-12">
   <div class="pointer-events-none absolute inset-0 techgrid opacity-70" aria-hidden="true"></div>
   <div class="blob top-[-10%] right-[-5%] h-[30rem] w-[30rem] bg-copper/12" aria-hidden="true"></div>
 
-  <div class="relative mx-auto max-w-[88rem] px-5 md:px-10">
-    <div class="mx-auto max-w-[60rem] text-center">
+  <div class="relative mx-auto grid max-w-[88rem] grid-cols-12 items-center gap-x-8 gap-y-8 px-5 md:px-10">
+    <div class="col-span-12 mx-auto max-w-[60rem] text-center lg:col-span-5 lg:mx-0 lg:max-w-none lg:text-left">
       <p class="eyebrow a-fade text-copper" data-hero-eyebrow>
         Panel de seguimiento de obra e inversión
       </p>
 
-      <h1 class="display mt-5 text-[clamp(2rem,5.4vw,4.9rem)]" data-hero-title>
-        <span class="a-line"><span>Cada obra, cada euro</span></span>
+      <h1 class="display mt-5 text-[clamp(2rem,4.6vw,4rem)]" data-hero-title>
+        <span class="a-line"><span>Cada obra,</span></span>
+        <span class="a-line"><span>cada euro</span></span>
         <span class="a-line"><span>y cada inversor,</span></span>
         <span class="a-line"><span><em class="not-italic text-copper">en un solo panel.</em></span></span>
       </h1>
 
-      <p class="a-fade mx-auto mt-6 max-w-[38rem] text-lg leading-relaxed text-ink/75" data-hero-sub>
+      <p class="a-fade mx-auto mt-5 max-w-[38rem] text-lg lg:mx-0 lg:max-w-[27rem] leading-relaxed text-ink/75" data-hero-sub>
         Centraliza el seguimiento de obra, los contratos, los gastos y la inversión.
         Se instala en las cuentas de su empresa y es suyo.
       </p>
 
-      <div class="a-fade mt-8 flex flex-wrap items-center justify-center gap-4" data-hero-ctas>
+      <div class="a-fade mt-7 flex flex-wrap items-center justify-center gap-4 lg:justify-start" data-hero-ctas>
         <a href={MAILTO_DEMO} class="btn btn-copper" data-magnetic>
           Pedir una demo <span class="arr" aria-hidden="true">→</span>
         </a>
@@ -34,7 +35,7 @@ import { MAILTO_DEMO, DEMO_PORTAL } from '../data/site.js';
       </div>
     </div>
 
-    <div class="mt-10 md:mt-12">
+    <div class="col-span-12 mt-4 md:mt-6 lg:col-span-7 lg:mt-0">
       <HeroScene />
     </div>
   </div>
