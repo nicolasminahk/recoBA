@@ -1,0 +1,97 @@
+---
+/**
+ * Captura real del producto dentro de un marco de navegador sobrio.
+ * Las capturas originales son a 2x (retina); se sirven en AVIF/WebP con
+ * srcset. La del hero carga con prioridad; el resto en diferido.
+ */
+import { Picture } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  domain: string;
+  eager?: boolean;
+  sizes?: string;
+  widths?: number[];
+  caption?: boolean;
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  domain,
+  eager = false,
+  sizes = '(min-width: 1024px) 50vw, calc(100vw - 2.5rem)',
+  widths = [480, 800, 1200, 1600],
+  caption = true,
+  class: className = '',
+} = Astro.props;
+---
+
+<figure class:list={['shot', className]}>
+  <div class="shot-frame">
+    <div class="shot-bar" aria-hidden="true">
+      <span class="flex gap-1.5">
+        <span class="h-2.5 w-2.5 rounded-full border border-ink/20"></span>
+        <span class="h-2.5 w-2.5 rounded-full border border-ink/20"></span>
+        <span class="h-2.5 w-2.5 rounded-full border border-copper/60 bg-copper/30"></span>
+      </span>
+      <span class="shot-url">{domain}</span>
+    </div>
+    <Picture
+      src={src}
+      alt={alt}
+      widths={widths}
+      sizes={sizes}
+      formats={['avif']}
+      fallbackFormat="webp"
+      loading={eager ? 'eager' : 'lazy'}
+      decoding={eager ? 'sync' : 'async'}
+      fetchpriority={eager ? 'high' : 'auto'}
+      pictureAttributes={{ class: 'block' }}
+      class="block h-auto w-full"
+    />
+  </div>
+  {
+    caption && (
+      <figcaption class="mt-2.5 text-[0.74rem] tracking-wide text-ink/45">
+        Demo navegable · datos de demostración
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .shot-frame {
+    overflow: hidden;
+    border-radius: 0.9rem;
+    background: #fff;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+    box-shadow:
+      0 1px 2px color-mix(in srgb, var(--color-ink) 6%, transparent),
+      0 24px 60px -24px color-mix(in srgb, var(--color-ink) 28%, transparent);
+  }
+  .shot-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0.9rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 9%, transparent);
+    background: var(--color-paper-2);
+  }
+  .shot-url {
+    flex: 1;
+    text-align: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: color-mix(in srgb, var(--color-ink) 50%, transparent);
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+    background: #fff;
+    padding: 0.2rem 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

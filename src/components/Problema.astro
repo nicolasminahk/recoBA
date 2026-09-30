@@ -1,0 +1,79 @@
+---
+const problemas = [
+  {
+    titulo: 'Horas de reporting manual.',
+    texto: 'Cada informe al inversor o al comité se arma a mano, copiando de varias fuentes.',
+    icon: 'reloj',
+  },
+  {
+    titulo: 'Desviaciones que se ven tarde.',
+    texto: 'El gasto real frente al presupuesto por partida no está a la vista hasta el cierre.',
+    icon: 'desvio',
+  },
+  {
+    titulo: 'Confianza que depende de una llamada.',
+    texto: 'Quien pone el capital no tiene dónde mirar el estado real de su dinero.',
+    icon: 'llamada',
+  },
+];
+
+const fuentes = ['WhatsApp', 'Excel', 'Correo', 'Drive', 'Una llamada'];
+---
+
+<section id="punto-de-partida" class="relative py-20 md:py-28">
+  <div class="mx-auto max-w-[88rem] px-5 md:px-10">
+    <div class="grid grid-cols-12 gap-x-6 gap-y-8">
+      <div class="col-span-12 lg:col-span-6">
+        <p class="eyebrow text-copper" data-reveal>El punto de partida</p>
+        <h2 class="display mt-4 text-[clamp(2rem,4.2vw,3.6rem)]" data-reveal>
+          Hoy el seguimiento de una inversión vive repartido en cinco sitios.
+        </h2>
+      </div>
+      <div class="col-span-12 flex flex-col justify-end lg:col-span-5 lg:col-start-8">
+        <p class="text-lg text-ink/70" data-reveal>
+          Fotos en WhatsApp, presupuestos en Excel, facturas en el correo, contratos
+          en una carpeta compartida y un inversor que llama para preguntar cómo va la
+          obra.
+        </p>
+        <ul class="mt-6 flex flex-wrap gap-2" aria-label="Dónde vive hoy la información" data-reveal>
+          {
+            fuentes.map((f) => (
+              <li class="rounded-full border border-ink/15 px-3.5 py-1.5 text-[0.8rem] font-medium text-ink/65">
+                {f}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+      {
+        problemas.map((p) => (
+          <article class="border-t border-ink/15 pt-6" data-card>
+            {p.icon === 'reloj' && (
+              <svg class="a-draw h-9 w-9 text-copper" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <circle cx="22" cy="22" r="17" />
+                <path d="M22 11 V22 L30 27" />
+              </svg>
+            )}
+            {p.icon === 'desvio' && (
+              <svg class="a-draw h-9 w-9 text-copper" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M6 34 H38" />
+                <path d="M8 30 L18 22 L26 27 L37 12" />
+                <path d="M31 12 H37 V18" />
+              </svg>
+            )}
+            {p.icon === 'llamada' && (
+              <svg class="a-draw h-9 w-9 text-copper" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M10 8 H18 L21 16 L16 19 C18 24 21 27 26 29 L29 24 L37 27 V35 C37 36 36 37 35 37 C21 37 8 24 8 10 C8 9 9 8 10 8 Z" />
+              </svg>
+            )}
+            <h3 class="display mt-5 text-xl">{p.titulo}</h3>
+            <p class="mt-2 text-[0.95rem] leading-relaxed text-ink/65">{p.texto}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

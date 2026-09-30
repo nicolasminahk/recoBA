@@ -1,0 +1,287 @@
+---
+/**
+ * El producto en bloques: texto + captura real, alternando lado.
+ * Cada bloque es un ancla propia dentro de #producto.
+ */
+import Shot from './Shot.astro';
+import { Picture } from 'astro:assets';
+
+import bandeja from '../assets/shots/admin-obra-bandeja.png';
+import diario from '../assets/shots/admin-obra-diario.png';
+import movil from '../assets/shots/admin-movil-telefono.png';
+import documentos from '../assets/shots/admin-obra-documentos.png';
+import numeros from '../assets/shots/admin-obra-numeros.png';
+import dashboard from '../assets/shots/portal-dashboard.png';
+import oportunidades from '../assets/shots/portal-oportunidades.png';
+import avances from '../assets/shots/portal-avances.png';
+import gastos from '../assets/shots/portal-gastos.png';
+import inversion from '../assets/shots/portal-inversion.png';
+import camara from '../assets/shots/portal-camara.png';
+
+const portalTabs = [
+  { src: avances, alt: 'Pestaña de avances del portal del inversor: cronología de avances de obra con fotos' },
+  { src: gastos, alt: 'Pestaña de gastos del portal del inversor: ejecutado frente a presupuesto por partida' },
+  { src: inversion, alt: 'Pestaña de inversión del portal del inversor: capital aportado, distribuciones y rentabilidad proyectada' },
+  { src: oportunidades, alt: 'Pestaña de oportunidades del portal del inversor: nuevas operaciones con importe objetivo y ticket mínimo' },
+];
+---
+
+<section id="producto" class="relative py-20 md:py-28">
+  <div class="mx-auto max-w-[88rem] px-5 md:px-10">
+    <div class="max-w-[40rem]">
+      <p class="eyebrow text-copper" data-reveal>Producto</p>
+      <h2 class="display mt-4 text-[clamp(2rem,4.2vw,3.6rem)]" data-reveal>
+        Lo que verá su equipo. Lo que verán sus inversores.
+      </h2>
+      <p class="mt-5 text-lg text-ink/70" data-reveal>
+        Capturas reales de las demos navegables. Sin maquetas.
+      </p>
+    </div>
+
+    <!-- 1. Sus obras -->
+    <article id="sus-obras" class="prod-block mt-16 md:mt-24">
+      <div class="prod-text">
+        <p class="eyebrow text-ink/45">01 · Sus obras</p>
+        <h3 class="display mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)]">
+          Lo que espera respuesta, el estado en una línea, una bandeja para lo que llega.
+        </h3>
+        <ul class="prod-list">
+          <li>Cada obra con su estado, su avance y lo que tiene pendiente de revisar.</li>
+          <li>Una bandeja de entrada única: lo que se reenvía por correo aparece aquí y se asigna a su obra.</li>
+          <li>Avisos con fecha: un avance por publicar, un contrato que vence, una captación que cierra.</li>
+        </ul>
+      </div>
+      <div class="prod-media">
+        <Shot
+          src={bandeja}
+          domain="gestion.recoba.casa/admin"
+          alt="Bandeja de entrada de una obra en el panel de administración: correos reenviados con adjuntos, pendientes de asignar a la obra"
+        />
+      </div>
+    </article>
+
+    <!-- 2. Seguimiento de obra -->
+    <article id="seguimiento" class="prod-block prod-block--flip mt-16 md:mt-24">
+      <div class="prod-text">
+        <p class="eyebrow text-ink/45">02 · Seguimiento de obra</p>
+        <h3 class="display mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)]">
+          Fases del proyecto con la fecha real de cada hito.
+        </h3>
+        <ul class="prod-list">
+          <li>Se carga desde el móvil en tres pasos, o reenviando la foto o la factura al correo del panel.</li>
+          <li>Obra envía, administración publica: nada llega al inversor sin revisar.</li>
+          <li>Cada avance indica cuántos inversores lo abrieron.</li>
+        </ul>
+      </div>
+      <div class="prod-media">
+        <div class="relative">
+          <Shot
+            src={diario}
+            domain="gestion.recoba.casa/admin"
+            alt="Diario de obra en el panel de administración: fases del proyecto, hitos con fecha real y avances publicados con fotos"
+          />
+          <figure class="prod-phone" aria-label="Carga desde el móvil">
+            <Picture
+              src={movil}
+              alt="Carga de un avance desde el móvil en tres pasos: foto, fase y nota"
+              widths={[200, 320, 400]}
+              sizes="160px"
+              formats={['avif']}
+              fallbackFormat="webp"
+              loading="lazy"
+              decoding="async"
+              class="block h-auto w-full"
+            />
+          </figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3. Documentos y números -->
+    <article id="documentos-numeros" class="prod-block mt-16 md:mt-24">
+      <div class="prod-text">
+        <p class="eyebrow text-ink/45">03 · Documentos y números</p>
+        <h3 class="display mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)]">
+          Contratos, facturas y presupuesto, con vencimiento y permisos.
+        </h3>
+        <ul class="prod-list">
+          <li>Contratos, escrituras, seguros y facturas, con fecha de vencimiento y quién puede verlos.</li>
+          <li>Presupuesto, ejecutado y disponible por partida.</li>
+          <li>Actualizable a mano o subiendo un Excel.</li>
+        </ul>
+      </div>
+      <div class="prod-media">
+        <div class="grid grid-cols-1 gap-5">
+          <Shot
+            src={documentos}
+            domain="gestion.recoba.casa/admin"
+            caption={false}
+            alt="Documentos de una obra en el panel de administración: contratos, escrituras, seguros y facturas con vencimiento y permisos por perfil"
+          />
+          <Shot
+            src={numeros}
+            domain="gestion.recoba.casa/admin"
+            alt="Números de una obra en el panel de administración: presupuesto, ejecutado y disponible por partida, con importación desde Excel"
+          />
+        </div>
+      </div>
+    </article>
+
+    <!-- 4. Portal del inversor -->
+    <article id="portal" class="prod-block prod-block--flip mt-16 md:mt-24">
+      <div class="prod-text">
+        <p class="eyebrow text-ink/45">04 · Portal del inversor</p>
+        <h3 class="display mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)]">
+          Cada inversor entra y ve solo lo suyo.
+        </h3>
+        <ul class="prod-list">
+          <li>Cartera consolidada: capital invertido, valor estimado, distribuciones y rentabilidad proyectada.</li>
+          <li>Acceso con su cuenta de Google o con un enlace por correo. Sin contraseñas nuevas.</li>
+          <li>Nuevas oportunidades con importe objetivo, ticket mínimo y registro de interés.</li>
+        </ul>
+      </div>
+      <div class="prod-media">
+        <Shot
+          src={dashboard}
+          domain="gestion.recoba.casa"
+          caption={false}
+          alt="Portal del inversor: resumen de cartera con capital invertido, valor estimado, distribuciones recibidas y rentabilidad proyectada, últimas novedades y proyectos"
+        />
+        <ul class="mt-4 grid grid-cols-4 gap-3" aria-label="Pestañas del portal del inversor">
+          {
+            portalTabs.map((t) => (
+              <li class="overflow-hidden rounded-lg border border-ink/12 bg-white">
+                <Picture
+                  src={t.src}
+                  alt={t.alt}
+                  widths={[240, 400]}
+                  sizes="(min-width: 1024px) 11vw, 22vw"
+                  formats={['avif']}
+              fallbackFormat="webp"
+                  loading="lazy"
+                  decoding="async"
+                  class="block h-auto w-full"
+                />
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-2.5 text-[0.74rem] tracking-wide text-ink/45">Demo navegable · datos de demostración</p>
+      </div>
+    </article>
+
+    <!-- 5. Cámaras de obra -->
+    <article id="camaras" class="prod-block mt-16 md:mt-24">
+      <div class="prod-text">
+        <p class="eyebrow text-ink/45">05 · Cámaras de obra</p>
+        <h3 class="display mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)]">
+          La obra, en directo, solo para quien está autorizado.
+        </h3>
+        <ul class="prod-list">
+          <li>Señal en directo, visor del proveedor de seguridad o capturas periódicas con timelapse.</li>
+        </ul>
+        <dl class="mt-7 grid grid-cols-1 gap-5 border-t border-ink/12 pt-6 sm:grid-cols-2">
+          <div>
+            <dt class="eyebrow text-ink/45">Su empresa pone</dt>
+            <dd class="mt-2 text-[0.92rem] leading-relaxed text-ink/70">
+              Cámaras, conexión, grabación y normativa de videovigilancia.
+            </dd>
+          </div>
+          <div>
+            <dt class="eyebrow text-copper">recoBA pone</dt>
+            <dd class="mt-2 text-[0.92rem] leading-relaxed text-ink/70">
+              Conecta la señal, la muestra solo a perfiles autorizados y asesora en el equipo.
+            </dd>
+          </div>
+        </dl>
+        <p class="mt-5 text-[0.82rem] leading-relaxed text-ink/50">
+          La disponibilidad de la imagen depende del equipo y la conexión de su empresa.
+        </p>
+      </div>
+      <div class="prod-media">
+        <Shot
+          src={camara}
+          domain="gestion.recoba.casa"
+          alt="Cámara de obra en el portal del inversor: imagen en directo de la obra con fecha y hora, visible solo para perfiles autorizados"
+        />
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .prod-block {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 2rem 1.5rem;
+    align-items: center;
+  }
+  .prod-text {
+    grid-column: span 12;
+  }
+  .prod-media {
+    grid-column: span 12;
+  }
+  @media (min-width: 1024px) {
+    .prod-text {
+      grid-column: 1 / span 5;
+    }
+    .prod-media {
+      grid-column: 7 / span 6;
+    }
+    .prod-block--flip .prod-text {
+      grid-column: 8 / span 5;
+      order: 2;
+    }
+    .prod-block--flip .prod-media {
+      grid-column: 1 / span 6;
+      order: 1;
+    }
+  }
+  .prod-list {
+    margin-top: 1.5rem;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .prod-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: color-mix(in srgb, var(--color-ink) 70%, transparent);
+  }
+  .prod-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    background: var(--color-copper);
+  }
+  /* Móvil superpuesto a la captura de escritorio (solo en pantallas anchas) */
+  .prod-phone {
+    display: none;
+  }
+  @media (min-width: 640px) {
+    .prod-phone {
+      display: block;
+      position: absolute;
+      right: -0.75rem;
+      bottom: 1.5rem;
+      width: 9.5rem;
+      overflow: hidden;
+      border-radius: 1.1rem;
+      border: 1px solid color-mix(in srgb, var(--color-ink) 15%, transparent);
+      background: #fff;
+      box-shadow: 0 24px 50px -20px color-mix(in srgb, var(--color-ink) 45%, transparent);
+    }
+  }
+  @media (min-width: 1280px) {
+    .prod-phone {
+      width: 11rem;
+      right: -1.5rem;
+    }
+  }
+</style>
