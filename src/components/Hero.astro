@@ -1,6 +1,10 @@
 ---
 import HeroScene from './HeroScene.astro';
-import { MAILTO_DEMO, DEMO_PORTAL } from '../data/site.js';
+import { mailtoDemo, DEMO_PORTAL } from '../data/site.js';
+import { useT, getLang } from '../i18n/index.js';
+
+const t = useT(Astro);
+const MAILTO_DEMO = mailtoDemo(getLang(Astro));
 ---
 
 <section id="top" class="relative overflow-hidden pt-[6rem] pb-8 md:pt-[7rem] md:pb-12">
@@ -10,27 +14,24 @@ import { MAILTO_DEMO, DEMO_PORTAL } from '../data/site.js';
   <div class="relative mx-auto grid max-w-[88rem] grid-cols-12 items-center gap-x-8 gap-y-8 px-5 md:px-10">
     <div class="col-span-12 mx-auto max-w-[60rem] text-center lg:col-span-5 lg:mx-0 lg:max-w-none lg:text-left">
       <p class="eyebrow a-fade text-copper" data-hero-eyebrow>
-        Panel de seguimiento de obra e inversión
+        {t.hero.eyebrow}
       </p>
 
-      <h1 class="display mt-5 text-[clamp(2rem,4.6vw,4rem)]" data-hero-title>
-        <span class="a-line"><span>Cada obra,</span></span>
-        <span class="a-line"><span>cada euro</span></span>
-        <span class="a-line"><span>y cada inversor,</span></span>
-        <span class="a-line"><span><em class="not-italic text-copper">en un solo panel.</em></span></span>
+      <h1 class:list={['display mt-5', t.hero.titleClass]} data-hero-title>
+        {t.hero.title.map((line) => <><span class="a-line"><span>{line}</span></span>{' '}</>)}
+        <span class="a-line"><span><em class="not-italic text-copper">{t.hero.titleAccent}</em></span></span>
       </h1>
 
       <p class="a-fade mx-auto mt-5 max-w-[38rem] text-lg lg:mx-0 lg:max-w-[27rem] leading-relaxed text-ink/75" data-hero-sub>
-        Centraliza el seguimiento de obra, los contratos, los gastos y la inversión.
-        Se instala en las cuentas de su empresa y es suyo.
+        {t.hero.sub}
       </p>
 
       <div class="a-fade mt-7 flex flex-wrap items-center justify-center gap-4 lg:justify-start" data-hero-ctas>
         <a href={MAILTO_DEMO} class="btn btn-copper" data-magnetic>
-          Pedir una demo <span class="arr" aria-hidden="true">→</span>
+          {t.common.ctaDemo} <span class="arr" aria-hidden="true">→</span>
         </a>
         <a href={DEMO_PORTAL} target="_blank" rel="noopener" class="btn btn-ghost" data-magnetic>
-          Ver la demo del portal <span class="arr" aria-hidden="true">↗</span>
+          {t.hero.ctaPortal} <span class="arr" aria-hidden="true">↗</span>
         </a>
       </div>
     </div>

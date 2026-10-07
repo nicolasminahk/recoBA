@@ -1,11 +1,11 @@
 ---
-import { MAILTO_DEMO, EMAIL, DEMO_PORTAL, DEMO_ADMIN } from '../data/site.js';
+import { mailtoDemo, EMAIL, DEMO_PORTAL, DEMO_ADMIN } from '../data/site.js';
+import { useT, getLang } from '../i18n/index.js';
 
-const pasos = [
-  ['Demo de 30 minutos', 'En remoto o en su oficina de Madrid, Valencia o Málaga.'],
-  ['Diagnóstico de dos semanas', 'Perfiles, obras, partidas y documentos. Alcance y calendario cerrados.'],
-  ['Instalación con sus obras', 'En sus cuentas, con su marca. Sus inversores dentro.'],
-];
+const t = useT(Astro).cta;
+const ctaDemo = useT(Astro).common.ctaDemo;
+const MAILTO_DEMO = mailtoDemo(getLang(Astro));
+const { pasos } = t;
 ---
 
 <section id="demo" class="relative py-20 md:py-28">
@@ -31,27 +31,27 @@ const pasos = [
             <line x1="10" y1="52" x2="54" y2="52" />
           </svg>
           <h2 class="display mt-6 max-w-[30rem] text-[clamp(2rem,4.2vw,3.6rem)]">
-            Lo mejor es verlo funcionando con una obra suya.
+            {t.title}
           </h2>
 
           <div class="mt-8 flex flex-wrap items-center gap-4">
             <a href={MAILTO_DEMO} class="btn btn-copper !px-8 !py-4 text-base" data-magnetic>
-              Pedir una demo <span class="arr" aria-hidden="true">→</span>
+              {ctaDemo} <span class="arr" aria-hidden="true">→</span>
             </a>
           </div>
           <p class="mt-4 text-[0.9rem] text-paper/60">
-            O escriba directamente a{' '}
+            {t.writeTo}{' '}
             <a href={`mailto:${EMAIL}`} class="select-all font-medium text-paper hover:text-copper">{EMAIL}</a>
           </p>
 
           <p class="mt-8 text-[0.85rem] text-paper/50">
-            Demos navegables con datos de ejemplo:
+            {t.demosLabel}
             <a href={DEMO_PORTAL} target="_blank" rel="noopener" class="ml-1 text-paper/80 hover:text-copper"
-              >portal del inversor <span aria-hidden="true">↗</span></a
+              >{t.portal} <span aria-hidden="true">↗</span></a
             >
             <span class="mx-1.5" aria-hidden="true">·</span>
             <a href={DEMO_ADMIN} target="_blank" rel="noopener" class="text-paper/80 hover:text-copper"
-              >panel de administración <span aria-hidden="true">↗</span></a
+              >{t.admin} <span aria-hidden="true">↗</span></a
             >
           </p>
         </div>

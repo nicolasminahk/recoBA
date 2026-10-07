@@ -45,8 +45,8 @@ La URL canónica vive en `astro.config.mjs` (`site`).
 
 | Comando | Qué hace |
 | --- | --- |
-| `npm run og` | Regenera `public/og.png` (1200×630) desde `scripts/og-template.html` |
-| `npm run qa [url]` | QA con Playwright a 375, 768, 1280 y 1440 px: secciones, anclas, CTAs, acordeón, menú móvil, scroll horizontal, restos del modelo anterior y errores de consola. Guarda capturas de página completa en `qa/` |
+| `npm run og` | Regenera `public/og.png` y `public/og-en.png` (1200×630) desde `scripts/og-template.html` |
+| `npm run qa [url]` | QA con Playwright de `/` y `/en/` a 375, 768, 1280 y 1440 px: secciones, anclas, CTAs, acordeón, menú móvil, selector de idioma, `lang`, scroll horizontal, restos del modelo anterior, español colado en la versión inglesa y errores de consola. Guarda capturas de página completa en `qa/` |
 
 Ambos usan Playwright (`npx playwright install chromium` la primera vez).
 Para el QA conviene apuntar a un build de producción (`npm run build && npx astro preview --port 4399` y `npm run qa http://localhost:4399`), porque el servidor de desarrollo genera las imágenes al vuelo.
@@ -55,8 +55,13 @@ Para el QA conviene apuntar a un build de producción (`npm run build && npx ast
 
 ```
 src/
-  layouts/Base.astro        # head, SEO, OG/Twitter, JSON-LD (Organization + SoftwareApplication)
-  data/site.js              # email, mailto de demo y URLs de las demos
+  pages/index.astro         # home en español (/)
+  pages/en/index.astro      # home en inglés (/en/)
+  components/Home.astro     # la home completa, compartida por los dos idiomas
+  i18n/es.js · i18n/en.js   # TODOS los textos visibles, con la misma estructura
+  i18n/index.js             # idioma de la página, rutas por idioma
+  layouts/Base.astro        # head, SEO, hreflang, OG/Twitter, JSON-LD (Organization + SoftwareApplication)
+  data/site.js              # email, mailto de demo (por idioma) y URLs de las demos
   components/               # una sección = un componente (Hero, Problema, Propuesta, Producto…)
   components/Shot.astro     # captura del producto dentro de un marco de navegador (<Picture>)
   assets/shots/             # capturas reales del panel y del portal (PNG a 2x)
@@ -66,12 +71,27 @@ public/fonts/               # woff2 self-hosted (licencia Fontshare)
 scripts/                    # og.mjs · qa.mjs (tooling, no se despliega)
 ```
 
+## Idiomas
+
+La web está en español (`/`, idioma por defecto) e inglés (`/en/`), con el
+i18n de Astro. El selector ES/EN de la barra de navegación conserva la sección
+(`#ancla`) al cambiar y guarda la elección: quien eligió inglés y vuelve a
+`recoba.casa` va directo a `/en/`. Sin elección guardada no hay redirección
+automática, para que los buscadores indexen cada idioma en su URL (cada página
+declara la otra con `hreflang` y el sitemap también).
+
+- **Cambiar un texto**: en `src/i18n/es.js` y su equivalente en `src/i18n/en.js`.
+  Los componentes no llevan texto fijo.
+- **Imagen OG**: `npm run og` genera `og.png` (es) y `og-en.png` (en).
+- Las capturas y las demos navegables están en español; la versión inglesa
+  lo indica en la sección de producto y en las preguntas frecuentes.
+
 ## Notas de mantenimiento
 
 - **Contacto y demos**: todo sale de `src/data/site.js`. Los botones «Pedir una
   demo» abren un `mailto:` con asunto y cuerpo prellenados.
-- **Precios**: literales en `src/components/Precios.astro` y en el JSON-LD de
-  `Base.astro`; si cambian, actualizar los dos sitios.
+- **Precios**: en `src/i18n/es.js` y `src/i18n/en.js` (`precios.paquetes`); el
+  JSON-LD de `Base.astro` los toma de ahí.
 - **Capturas**: sustituir los PNG de `src/assets/shots/` manteniendo el nombre;
   el build regenera los formatos.
 - **Lighthouse** (build de producción, móvil): Performance 98 · Accessibility 100 ·

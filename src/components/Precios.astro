@@ -1,56 +1,11 @@
 ---
-import { MAILTO_DEMO, RADAR } from '../data/site.js';
+import { mailtoDemo, RADAR } from '../data/site.js';
+import { useT, getLang } from '../i18n/index.js';
 
-const paquetes = [
-  {
-    nombre: 'Esencial',
-    precio: '8.500',
-    para: 'Para empezar a centralizar.',
-    items: [
-      'Panel de administración y portal del inversor',
-      'Instalación en sus cuentas, con su marca y dominio',
-      'Avances, documentos, personas y números de cada obra',
-      'Bandeja de correo del panel',
-      'Carga de hasta 3 obras y 2 formaciones',
-      '60 días de garantía',
-    ],
-    recomendado: false,
-  },
-  {
-    nombre: 'Profesional',
-    precio: '12.500',
-    para: 'Para toda la cartera.',
-    items: [
-      'Todo lo de Esencial',
-      'Puesta en marcha con hasta 10 obras en curso',
-      'Números de la obra actualizables desde Excel',
-      'Cámara de la obra conectada a sus señales',
-      'Fases, partidas y perfiles a su medida',
-      '90 días de garantía',
-    ],
-    recomendado: true,
-  },
-  {
-    nombre: 'Integral',
-    precio: '14.900',
-    para: 'Sin preocuparse de la parte técnica.',
-    items: [
-      'Todo lo de Profesional',
-      '12 meses de mantenimiento incluidos',
-      'Actualizaciones y copias verificadas',
-      '2 horas al mes de soporte y mejoras',
-    ],
-    recomendado: false,
-  },
-];
-
-const condiciones = [
-  ['Mantenimiento opcional', '190 €/mes (2 h) · 390 €/mes (5 h)'],
-  ['Diagnóstico', '1.500 €, se descuenta al contratar'],
-  ['Horas adicionales', '75 €/h'],
-  ['Pago', '40 % firma · 40 % instalación · 20 % entrega'],
-  ['Infraestructura', 'A cargo de su empresa, aprox. 50–80 €/mes'],
-];
+const t = useT(Astro).precios;
+const ctaDemo = useT(Astro).common.ctaDemo;
+const MAILTO_DEMO = mailtoDemo(getLang(Astro));
+const { paquetes, condiciones } = t;
 ---
 
 <section id="precios" class="relative overflow-hidden bg-ink py-20 text-paper md:py-28">
@@ -60,14 +15,14 @@ const condiciones = [
   <div class="relative mx-auto max-w-[88rem] px-5 md:px-10">
     <div class="grid grid-cols-12 gap-x-6 gap-y-6">
       <div class="col-span-12 lg:col-span-6">
-        <p class="eyebrow text-copper" data-reveal>Precios</p>
+        <p class="eyebrow text-copper" data-reveal>{t.eyebrow}</p>
         <h2 class="display mt-4 text-[clamp(2rem,4.2vw,3.6rem)]" data-reveal>
-          Un pago único.<br />Sin cuotas obligatorias.
+          {t.title[0]}<br />{t.title[1]}
         </h2>
       </div>
       <div class="col-span-12 flex items-end lg:col-span-5 lg:col-start-8">
         <p class="text-lg text-paper/65" data-reveal>
-          Precios sin IVA, orientativos. Se confirman tras el diagnóstico.
+          {t.lead}
         </p>
       </div>
     </div>
@@ -86,15 +41,17 @@ const condiciones = [
               <h3 class="display text-2xl">{p.nombre}</h3>
               {p.recomendado && (
                 <span class="eyebrow rounded-full border border-copper/60 px-3 py-1.5 text-copper">
-                  Recomendado
+                  {t.recomendado}
                 </span>
               )}
             </div>
             <p class="mt-1.5 text-[0.9rem] text-paper/55">{p.para}</p>
             <p class="display tnum mt-6 text-[2.6rem] leading-none">
-              {p.precio}<span class="ml-1 text-[1.4rem]">€</span>
+              {t.moneda.before && <span class="mr-0.5 text-[1.4rem]">{t.moneda.before}</span>}
+              {p.precio}
+              {t.moneda.after && <span class="ml-1 text-[1.4rem]">{t.moneda.after}</span>}
             </p>
-            <p class="mt-1.5 text-[0.78rem] text-paper/45">Pago único · sin IVA</p>
+            <p class="mt-1.5 text-[0.78rem] text-paper/45">{t.pagoUnico}</p>
             <ul class="mt-7 flex-1 space-y-2.5 border-t border-paper/12 pt-6">
               {p.items.map((i) => (
                 <li class="flex items-start gap-3 text-[0.92rem] leading-relaxed text-paper/80">
@@ -107,7 +64,7 @@ const condiciones = [
               href={MAILTO_DEMO}
               class:list={['btn mt-8 justify-center', p.recomendado ? 'btn-copper' : 'btn-ghost-light']}
             >
-              Pedir una demo <span class="arr" aria-hidden="true">→</span>
+              {ctaDemo} <span class="arr" aria-hidden="true">→</span>
             </a>
           </article>
         ))
@@ -127,11 +84,10 @@ const condiciones = [
 
     <div class="mt-8 flex flex-col gap-3 rounded-2xl border border-paper/15 px-6 py-5 sm:flex-row sm:items-center sm:justify-between" data-reveal>
       <p class="text-[0.92rem] text-paper/75">
-        <strong class="font-semibold text-paper">Servicio adicional:</strong> radar de
-        oportunidades a medida, en propuesta aparte.
+        <strong class="font-semibold text-paper">{t.extraLabel}</strong> {t.extra}
       </p>
       <a href={RADAR} target="_blank" rel="noopener" class="text-[0.9rem] font-medium text-copper hover:text-paper">
-        Ver un ejemplo: buscador.recoba.casa <span aria-hidden="true">↗</span>
+        {t.extraLink} <span aria-hidden="true">↗</span>
       </a>
     </div>
   </div>

@@ -5,6 +5,7 @@
  * srcset. La del hero carga con prioridad; el resto en diferido.
  */
 import { Picture } from 'astro:assets';
+import { useT } from '../i18n/index.js';
 
 interface Props {
   src: ImageMetadata;
@@ -27,6 +28,7 @@ const {
   caption = true,
   class: className = '',
 } = Astro.props;
+const demoCaption = useT(Astro).common.demoCaption;
 ---
 
 <figure class:list={['shot', className]}>
@@ -56,7 +58,7 @@ const {
   {
     caption && (
       <figcaption class="mt-2.5 text-[0.74rem] tracking-wide text-ink/45">
-        Demo navegable · datos de demostración
+        {demoCaption}
       </figcaption>
     )
   }

@@ -13,6 +13,10 @@ import cartera from '../assets/shots/crops/cartera.png';
 import atencion from '../assets/shots/crops/atencion.png';
 import camara from '../assets/shots/crops/camara.png';
 import movil from '../assets/shots/admin-movil-telefono.png';
+import { useT } from '../i18n/index.js';
+
+const t = useT(Astro).scene;
+const caption = useT(Astro).common.demoCaption;
 
 const pic = {
   formats: ['avif'] as const,
@@ -23,7 +27,7 @@ const pic = {
 };
 ---
 
-<div class="stage a-fade" data-hero-stage aria-label="Escena del producto">
+<div class="stage a-fade" data-hero-stage aria-label={t.aria}>
   <div class="stage-tilt" data-stage-tilt>
     <div class="stage-inner" data-stage-inner>
       <!-- Capa base: el panel de obras -->
@@ -38,7 +42,7 @@ const pic = {
         </div>
         <Picture
           src={base}
-          alt="Panel de administración de recoBA: listado de obras con obras en curso, capital de inversores, pendientes de revisar, bandeja de entrada de correo y avisos que requieren atención"
+          alt={t.baseAlt}
           widths={[640, 960, 1280, 1800, 2304]}
           sizes="(min-width: 1200px) 1040px, calc(100vw - 2.5rem)"
           fetchpriority="high"
@@ -49,10 +53,10 @@ const pic = {
       <!-- Tarjetas flotantes -->
       <figure class="layer card card-cartera" data-depth="1.5">
         <div class="card-inner" data-float>
-          <figcaption class="card-tag">Portal del inversor · cartera</figcaption>
+          <figcaption class="card-tag">{t.carteraTag}</figcaption>
           <Picture
             src={cartera}
-            alt="Resumen de cartera en el portal del inversor: capital invertido, valor estimado actual, distribuciones recibidas y TIR proyectada"
+            alt={t.carteraAlt}
             widths={[480, 800, 1200]}
             sizes="(min-width: 1024px) 560px, 80vw"
             {...pic}
@@ -62,10 +66,10 @@ const pic = {
 
       <figure class="layer card card-atencion" data-depth="1.1">
         <div class="card-inner" data-float>
-          <figcaption class="card-tag">Panel · requiere atención</figcaption>
+          <figcaption class="card-tag">{t.atencionTag}</figcaption>
           <Picture
             src={atencion}
-            alt="Lista de avisos del panel: un avance por publicar, entradas sin revisar, cierres de captación y un contrato que vence"
+            alt={t.atencionAlt}
             widths={[360, 600, 900]}
             sizes="(min-width: 1024px) 330px, 60vw"
             {...pic}
@@ -75,10 +79,10 @@ const pic = {
 
       <figure class="layer card card-camara" data-depth="1.3">
         <div class="card-inner" data-float>
-          <figcaption class="card-tag"><span class="live-dot" aria-hidden="true"></span>Cámara de obra · en directo</figcaption>
+          <figcaption class="card-tag"><span class="live-dot" aria-hidden="true"></span>{t.camaraTag}</figcaption>
           <Picture
             src={camara}
-            alt="Imagen en directo de la cámara de una obra con la fecha y la hora de la captura"
+            alt={t.camaraAlt}
             widths={[360, 600, 900]}
             sizes="(min-width: 1024px) 340px, 60vw"
             {...pic}
@@ -90,7 +94,7 @@ const pic = {
         <div class="card-inner card-inner--phone" data-float>
           <Picture
             src={movil}
-            alt="Carga de un avance de obra desde el móvil en tres pasos: foto, fase y nota"
+            alt={t.movilAlt}
             widths={[200, 320, 480]}
             sizes="(min-width: 1024px) 170px, 30vw"
             {...pic}
@@ -99,7 +103,7 @@ const pic = {
       </figure>
     </div>
   </div>
-  <p class="stage-caption">Demo navegable · datos de demostración</p>
+  <p class="stage-caption">{caption}</p>
 </div>
 
 <style>

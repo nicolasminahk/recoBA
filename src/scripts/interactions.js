@@ -19,15 +19,18 @@ export function initNav() {
   const btn = document.getElementById('menu-btn');
   const menu = document.getElementById('mobile-menu');
   if (btn && menu) {
+    // Las etiquetas vienen traducidas desde Nav.astro
+    const labelOpen = btn.dataset.labelOpen ?? 'Abrir menú';
+    const labelClose = btn.dataset.labelClose ?? 'Cerrar menú';
     const close = () => {
       menu.classList.add('hidden');
       btn.setAttribute('aria-expanded', 'false');
-      btn.setAttribute('aria-label', 'Abrir menú');
+      btn.setAttribute('aria-label', labelOpen);
     };
     btn.addEventListener('click', () => {
       const open = menu.classList.toggle('hidden') === false;
       btn.setAttribute('aria-expanded', String(open));
-      btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      btn.setAttribute('aria-label', open ? labelClose : labelOpen);
     });
     menu.querySelectorAll('[data-menu-link]').forEach((a) => a.addEventListener('click', close));
   }

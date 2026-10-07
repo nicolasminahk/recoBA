@@ -1,13 +1,20 @@
 ---
-import { MAILTO_DEMO } from '../data/site.js';
+import { mailtoDemo } from '../data/site.js';
+import { useT, getLang, homePath, LOCALES } from '../i18n/index.js';
+import es from '../i18n/es.js';
+import en from '../i18n/en.js';
 
-const links = [
-  { href: '#producto', label: 'Producto' },
-  { href: '#como-funciona', label: 'Cómo funciona' },
-  { href: '#para-quien', label: 'Para quién' },
-  { href: '#precios', label: 'Precios' },
-  { href: '#preguntas', label: 'Preguntas' },
-];
+const t = useT(Astro);
+const lang = getLang(Astro);
+const links = t.nav.links;
+const MAILTO_DEMO = mailtoDemo(lang);
+const langs = LOCALES.map((l) => ({
+  code: l,
+  href: homePath(l),
+  hreflang: ({ es, en })[l].meta.htmlLang,
+  name: l === 'es' ? 'Español' : 'English',
+  current: l === lang,
+}));
 ---
 
 <header
@@ -16,9 +23,9 @@ const links = [
 >
   <nav
     class="mx-auto flex h-[4.5rem] max-w-[88rem] items-center justify-between px-5 md:px-10"
-    aria-label="Navegación principal"
+    aria-label={t.nav.aria}
   >
-    <a href="#top" class="flex items-center gap-2.5" aria-label="recoBA — inicio">
+    <a href="#top" class="flex items-center gap-2.5" aria-label={t.nav.home}>
       <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
         <rect width="64" height="64" rx="12" class="fill-ink"></rect>
         <path
@@ -51,13 +58,34 @@ const links = [
     </ul>
 
     <div class="flex items-center gap-3">
+      <ul class="lang-switch" aria-label={t.nav.langLabel}>
+        {
+          langs.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                hreflang={l.hreflang}
+                lang={l.hreflang}
+                aria-current={l.current ? 'true' : undefined}
+                title={l.name}
+                data-lang-link={l.code}
+              >
+                <span aria-hidden="true">{l.code.toUpperCase()}</span>
+                <span class="sr-only">{l.name}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
       <a href={MAILTO_DEMO} class="btn btn-copper max-sm:!hidden !px-5 !py-2.5 text-[0.88rem] whitespace-nowrap" data-magnetic>
-        Pedir una demo <span class="arr" aria-hidden="true">→</span>
+        {t.common.ctaDemo} <span class="arr" aria-hidden="true">→</span>
       </a>
       <button
         id="menu-btn"
         class="flex h-10 w-10 items-center justify-center rounded-full border border-ink/20 lg:hidden"
-        aria-label="Abrir menú"
+        aria-label={t.nav.openMenu}
+        data-label-open={t.nav.openMenu}
+        data-label-close={t.nav.closeMenu}
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
@@ -90,7 +118,54 @@ const links = [
       }
     </ul>
     <a href={MAILTO_DEMO} class="btn btn-copper mt-5 w-full justify-center sm:hidden" data-menu-link>
-      Pedir una demo <span class="arr" aria-hidden="true">→</span>
+      {t.common.ctaDemo} <span class="arr" aria-hidden="true">→</span>
     </a>
   </div>
 </header>
+
+<script is:inline>
+  // Al cambiar de idioma se conserva la sección (#ancla) y se recuerda la elección
+  document.querySelectorAll('[data-lang-link]').forEach((a) => {
+    a.addEventListener('click', () => {
+      try {
+        localStorage.setItem('recoba-lang', a.dataset.langLink);
+      } catch {}
+      if (location.hash) a.href = a.getAttribute('href') + location.hash;
+    });
+  });
+</script>
+
+<style>
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    padding: 0.2rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 18%, transparent);
+  }
+  .lang-switch a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    height: 1.9rem;
+    padding: 0 0.55rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: color-mix(in srgb, var(--color-ink) 60%, transparent);
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+  .lang-switch a:hover {
+    color: var(--color-copper);
+  }
+  .lang-switch a[aria-current='true'] {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .lang-switch a:focus-visible {
+    outline: 2px solid var(--color-copper);
+    outline-offset: 2px;
+  }
+</style>

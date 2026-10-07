@@ -1,29 +1,8 @@
 ---
-const pasos = [
-  {
-    titulo: 'Diagnóstico',
-    plazo: '2 semanas',
-    texto:
-      'Perfiles, obras, partidas, documentos y señales de cámara disponibles. Se cierran alcance y calendario.',
-  },
-  {
-    titulo: 'Instalación en sus cuentas',
-    plazo: 'Con su marca',
-    texto:
-      'Con su marca, su dominio y sus perfiles. Se prueban los permisos con usuarios reales antes de abrirla.',
-  },
-  {
-    titulo: 'Puesta en marcha con sus obras',
-    plazo: 'Formación',
-    texto:
-      'Carga de las obras en curso, formación a administración y obra, invitación a los inversores.',
-  },
-  {
-    titulo: 'Garantía y mantenimiento',
-    plazo: '60–90 días',
-    texto: '60 a 90 días de garantía según el paquete; después, mantenimiento opcional.',
-  },
-];
+import { useT } from '../i18n/index.js';
+
+const t = useT(Astro).comoFunciona;
+const { pasos } = t;
 ---
 
 <section id="como-funciona" class="relative overflow-hidden bg-paper-2 py-20 md:py-28">
@@ -32,15 +11,14 @@ const pasos = [
   <div class="relative mx-auto max-w-[88rem] px-5 md:px-10">
     <div class="grid grid-cols-12 gap-x-6 gap-y-6">
       <div class="col-span-12 lg:col-span-6">
-        <p class="eyebrow text-copper" data-reveal>Cómo funciona</p>
+        <p class="eyebrow text-copper" data-reveal>{t.eyebrow}</p>
         <h2 class="display mt-4 text-[clamp(2rem,4.2vw,3.6rem)]" data-reveal>
-          De la primera reunión a sus inversores dentro, en cuatro pasos.
+          {t.title}
         </h2>
       </div>
       <div class="col-span-12 flex items-end lg:col-span-5 lg:col-start-8">
         <p class="text-lg text-ink/70" data-reveal>
-          No parte de cero: el portal del inversor y el panel de administración ya
-          están diseñados y validados en demos navegables.
+          {t.lead}
         </p>
       </div>
     </div>

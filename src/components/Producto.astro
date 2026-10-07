@@ -5,6 +5,7 @@
  */
 import Shot from './Shot.astro';
 import { Picture } from 'astro:assets';
+import { useT } from '../i18n/index.js';
 
 import bandeja from '../assets/shots/admin-obra-bandeja.png';
 import diario from '../assets/shots/admin-obra-diario.png';
@@ -18,44 +19,45 @@ import gastos from '../assets/shots/portal-gastos.png';
 import inversion from '../assets/shots/portal-inversion.png';
 import camara from '../assets/shots/portal-camara.png';
 
+const t = useT(Astro).producto;
+const demoCaption = useT(Astro).common.demoCaption;
+
 const portalTabs = [
-  { src: avances, alt: 'Pestaña de avances del portal del inversor: cronología de avances de obra con fotos' },
-  { src: gastos, alt: 'Pestaña de gastos del portal del inversor: ejecutado frente a presupuesto por partida' },
-  { src: inversion, alt: 'Pestaña de inversión del portal del inversor: capital aportado, distribuciones y rentabilidad proyectada' },
-  { src: oportunidades, alt: 'Pestaña de oportunidades del portal del inversor: nuevas operaciones con importe objetivo y ticket mínimo' },
+  { src: avances, alt: t.portal.tabs.avances },
+  { src: gastos, alt: t.portal.tabs.gastos },
+  { src: inversion, alt: t.portal.tabs.inversion },
+  { src: oportunidades, alt: t.portal.tabs.oportunidades },
 ];
 ---
 
 <section id="producto" class="relative py-20 md:py-28">
   <div class="mx-auto max-w-[88rem] px-5 md:px-10">
     <div class="max-w-[40rem]">
-      <p class="eyebrow text-copper" data-reveal>Producto</p>
+      <p class="eyebrow text-copper" data-reveal>{t.eyebrow}</p>
       <h2 class="display mt-4 text-[clamp(2rem,4.2vw,3.6rem)]" data-reveal>
-        Lo que verá su equipo. Lo que verán sus inversores.
+        {t.title}
       </h2>
       <p class="mt-5 text-lg text-ink/70" data-reveal>
-        Capturas reales de las demos navegables. Sin maquetas.
+        {t.lead}
       </p>
     </div>
 
     <!-- 1. Sus obras -->
     <article id="sus-obras" class="prod-block mt-16 md:mt-24">
       <div class="prod-text">
-        <p class="eyebrow text-ink/45">01 · Sus obras</p>
+        <p class="eyebrow text-ink/45">{t.obras.eyebrow}</p>
         <h3 class="display mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)]">
-          Lo que espera respuesta, el estado en una línea, una bandeja para lo que llega.
+          {t.obras.title}
         </h3>
         <ul class="prod-list">
-          <li>Cada obra con su estado, su avance y lo que tiene pendiente de revisar.</li>
-          <li>Una bandeja de entrada única: lo que se reenvía por correo aparece aquí y se asigna a su obra.</li>
-          <li>Avisos con fecha: un avance por publicar, un contrato que vence, una captación que cierra.</li>
+          {t.obras.items.map((i) => <li>{i}</li>)}
         </ul>
       </div>
       <div class="prod-media">
         <Shot
           src={bandeja}
           domain="gestion.recoba.casa/admin"
-          alt="Bandeja de entrada de una obra en el panel de administración: correos reenviados con adjuntos, pendientes de asignar a la obra"
+          alt={t.obras.alt}
         />
       </div>
     </article>
@@ -63,14 +65,12 @@ const portalTabs = [
     <!-- 2. Seguimiento de obra -->
     <article id="seguimiento" class="prod-block prod-block--flip mt-16 md:mt-24">
       <div class="prod-text">
-        <p class="eyebrow text-ink/45">02 · Seguimiento de obra</p>
+        <p class="eyebrow text-ink/45">{t.seguimiento.eyebrow}</p>
         <h3 class="display mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)]">
-          Fases del proyecto con la fecha real de cada hito.
+          {t.seguimiento.title}
         </h3>
         <ul class="prod-list">
-          <li>Se carga desde el móvil en tres pasos, o reenviando la foto o la factura al correo del panel.</li>
-          <li>Obra envía, administración publica: nada llega al inversor sin revisar.</li>
-          <li>Cada avance indica cuántos inversores lo abrieron.</li>
+          {t.seguimiento.items.map((i) => <li>{i}</li>)}
         </ul>
       </div>
       <div class="prod-media">
@@ -78,12 +78,12 @@ const portalTabs = [
           <Shot
             src={diario}
             domain="gestion.recoba.casa/admin"
-            alt="Diario de obra en el panel de administración: fases del proyecto, hitos con fecha real y avances publicados con fotos"
+            alt={t.seguimiento.alt}
           />
-          <figure class="prod-phone" aria-label="Carga desde el móvil">
+          <figure class="prod-phone" aria-label={t.seguimiento.phoneAria}>
             <Picture
               src={movil}
-              alt="Carga de un avance desde el móvil en tres pasos: foto, fase y nota"
+              alt={t.seguimiento.phoneAlt}
               widths={[200, 320, 400]}
               sizes="160px"
               formats={['avif']}
@@ -100,14 +100,12 @@ const portalTabs = [
     <!-- 3. Documentos y números -->
     <article id="documentos-numeros" class="prod-block mt-16 md:mt-24">
       <div class="prod-text">
-        <p class="eyebrow text-ink/45">03 · Documentos y números</p>
+        <p class="eyebrow text-ink/45">{t.documentos.eyebrow}</p>
         <h3 class="display mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)]">
-          Contratos, facturas y presupuesto, con vencimiento y permisos.
+          {t.documentos.title}
         </h3>
         <ul class="prod-list">
-          <li>Contratos, escrituras, seguros y facturas, con fecha de vencimiento y quién puede verlos.</li>
-          <li>Presupuesto, ejecutado y disponible por partida.</li>
-          <li>Actualizable a mano o subiendo un Excel.</li>
+          {t.documentos.items.map((i) => <li>{i}</li>)}
         </ul>
       </div>
       <div class="prod-media">
@@ -116,12 +114,12 @@ const portalTabs = [
             src={documentos}
             domain="gestion.recoba.casa/admin"
             caption={false}
-            alt="Documentos de una obra en el panel de administración: contratos, escrituras, seguros y facturas con vencimiento y permisos por perfil"
+            alt={t.documentos.altDocs}
           />
           <Shot
             src={numeros}
             domain="gestion.recoba.casa/admin"
-            alt="Números de una obra en el panel de administración: presupuesto, ejecutado y disponible por partida, con importación desde Excel"
+            alt={t.documentos.altNumeros}
           />
         </div>
       </div>
@@ -130,14 +128,12 @@ const portalTabs = [
     <!-- 4. Portal del inversor -->
     <article id="portal" class="prod-block prod-block--flip mt-16 md:mt-24">
       <div class="prod-text">
-        <p class="eyebrow text-ink/45">04 · Portal del inversor</p>
+        <p class="eyebrow text-ink/45">{t.portal.eyebrow}</p>
         <h3 class="display mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)]">
-          Cada inversor entra y ve solo lo suyo.
+          {t.portal.title}
         </h3>
         <ul class="prod-list">
-          <li>Cartera consolidada: capital invertido, valor estimado, distribuciones y rentabilidad proyectada.</li>
-          <li>Acceso con su cuenta de Google o con un enlace por correo. Sin contraseñas nuevas.</li>
-          <li>Nuevas oportunidades con importe objetivo, ticket mínimo y registro de interés.</li>
+          {t.portal.items.map((i) => <li>{i}</li>)}
         </ul>
       </div>
       <div class="prod-media">
@@ -145,9 +141,9 @@ const portalTabs = [
           src={dashboard}
           domain="gestion.recoba.casa"
           caption={false}
-          alt="Portal del inversor: resumen de cartera con capital invertido, valor estimado, distribuciones recibidas y rentabilidad proyectada, últimas novedades y proyectos"
+          alt={t.portal.alt}
         />
-        <ul class="mt-4 grid grid-cols-4 gap-3" aria-label="Pestañas del portal del inversor">
+        <ul class="mt-4 grid grid-cols-4 gap-3" aria-label={t.portal.tabsAria}>
           {
             portalTabs.map((t) => (
               <li class="overflow-hidden rounded-lg border border-ink/12 bg-white">
@@ -157,7 +153,7 @@ const portalTabs = [
                   widths={[240, 400]}
                   sizes="(min-width: 1024px) 11vw, 22vw"
                   formats={['avif']}
-              fallbackFormat="webp"
+                  fallbackFormat="webp"
                   loading="lazy"
                   decoding="async"
                   class="block h-auto w-full"
@@ -166,43 +162,43 @@ const portalTabs = [
             ))
           }
         </ul>
-        <p class="mt-2.5 text-[0.74rem] tracking-wide text-ink/45">Demo navegable · datos de demostración</p>
+        <p class="mt-2.5 text-[0.74rem] tracking-wide text-ink/45">{demoCaption}</p>
       </div>
     </article>
 
     <!-- 5. Cámaras de obra -->
     <article id="camaras" class="prod-block mt-16 md:mt-24">
       <div class="prod-text">
-        <p class="eyebrow text-ink/45">05 · Cámaras de obra</p>
+        <p class="eyebrow text-ink/45">{t.camaras.eyebrow}</p>
         <h3 class="display mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)]">
-          La obra, en directo, solo para quien está autorizado.
+          {t.camaras.title}
         </h3>
         <ul class="prod-list">
-          <li>Señal en directo, visor del proveedor de seguridad o capturas periódicas con timelapse.</li>
+          {t.camaras.items.map((i) => <li>{i}</li>)}
         </ul>
         <dl class="mt-7 grid grid-cols-1 gap-5 border-t border-ink/12 pt-6 sm:grid-cols-2">
           <div>
-            <dt class="eyebrow text-ink/45">Su empresa pone</dt>
+            <dt class="eyebrow text-ink/45">{t.camaras.empresaLabel}</dt>
             <dd class="mt-2 text-[0.92rem] leading-relaxed text-ink/70">
-              Cámaras, conexión, grabación y normativa de videovigilancia.
+              {t.camaras.empresa}
             </dd>
           </div>
           <div>
-            <dt class="eyebrow text-copper">recoBA pone</dt>
+            <dt class="eyebrow text-copper">{t.camaras.recobaLabel}</dt>
             <dd class="mt-2 text-[0.92rem] leading-relaxed text-ink/70">
-              Conecta la señal, la muestra solo a perfiles autorizados y asesora en el equipo.
+              {t.camaras.recoba}
             </dd>
           </div>
         </dl>
         <p class="mt-5 text-[0.82rem] leading-relaxed text-ink/50">
-          La disponibilidad de la imagen depende del equipo y la conexión de su empresa.
+          {t.camaras.nota}
         </p>
       </div>
       <div class="prod-media">
         <Shot
           src={camara}
           domain="gestion.recoba.casa"
-          alt="Cámara de obra en el portal del inversor: imagen en directo de la obra con fecha y hora, visible solo para perfiles autorizados"
+          alt={t.camaras.alt}
         />
       </div>
     </article>

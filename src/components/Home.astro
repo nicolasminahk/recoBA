@@ -1,0 +1,36 @@
+---
+/** La home completa. Se usa en src/pages/index.astro (es) y src/pages/en/index.astro (en). */
+import Base from '../layouts/Base.astro';
+import Nav from './Nav.astro';
+import Hero from './Hero.astro';
+import Problema from './Problema.astro';
+import Propuesta from './Propuesta.astro';
+import Producto from './Producto.astro';
+import Propiedad from './Propiedad.astro';
+import ComoFunciona from './ComoFunciona.astro';
+import ParaQuien from './ParaQuien.astro';
+import Precios from './Precios.astro';
+import Faq from './Faq.astro';
+import Cta from './Cta.astro';
+import Footer from './Footer.astro';
+---
+
+<Base>
+  <Nav />
+  <main id="main">
+    <Hero />
+    <Problema />
+    <Propuesta />
+    <Producto />
+    <Propiedad />
+    <ComoFunciona />
+    <ParaQuien />
+    <Precios />
+    <Faq />
+    <Cta />
+  </main>
+  <Footer />
+  <script>
+    import '../scripts/main.js';
+  </script>
+</Base>

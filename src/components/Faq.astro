@@ -1,45 +1,18 @@
 ---
 import { DEMO_PORTAL, DEMO_ADMIN } from '../data/site.js';
+import { useT } from '../i18n/index.js';
 
-const preguntas = [
-  {
-    q: '¿Sustituye a nuestro ERP o programa de gestión?',
-    a: 'No. Recoge lo que ya circula sobre cada obra y se lo muestra a quien tiene que verlo.',
-  },
-  {
-    q: '¿Tenemos que pagar una cuota mensual?',
-    a: 'No. Es una licencia perpetua; solo paga la infraestructura directamente a cada proveedor (aprox. 50–80 € al mes) y, si quiere, el mantenimiento.',
-  },
-  {
-    q: '¿Dónde están los datos?',
-    a: 'En sus propias cuentas, alojados en la UE, exportables cuando quiera.',
-  },
-  {
-    q: '¿Qué pasa si dejamos de contratar el mantenimiento?',
-    a: 'La plataforma sigue funcionando y sigue siendo suya.',
-  },
-  {
-    q: '¿Cómo entran los inversores?',
-    a: 'Con su cuenta de Google o con un enlace por correo, solo si han sido invitados.',
-  },
-  {
-    q: '¿Cuánto tarda la puesta en marcha?',
-    a: 'El diagnóstico dura dos semanas; el calendario de instalación se cierra en él.',
-  },
-  {
-    q: '¿Podemos verlo antes?',
-    a: null, // respuesta con enlaces, se escribe abajo
-  },
-];
+const t = useT(Astro).faq;
+const { preguntas } = t;
 ---
 
 <section id="preguntas" class="relative py-20 md:py-28">
   <div class="mx-auto max-w-[88rem] px-5 md:px-10">
     <div class="grid grid-cols-12 gap-x-6 gap-y-10">
       <div class="col-span-12 lg:col-span-4">
-        <p class="eyebrow text-copper" data-reveal>Preguntas frecuentes</p>
+        <p class="eyebrow text-copper" data-reveal>{t.eyebrow}</p>
         <h2 class="display mt-4 text-[clamp(1.9rem,3.4vw,2.9rem)]" data-reveal>
-          Lo que suelen preguntarnos antes de la demo.
+          {t.title}
         </h2>
       </div>
 
@@ -55,15 +28,15 @@ const preguntas = [
                 <div class="pb-6 pr-10 text-[0.95rem] leading-relaxed text-ink/70">
                   {p.a ?? (
                     <p>
-                      Sí: las demos navegables están en{' '}
+                      {t.demos.before}{' '}
                       <a href={DEMO_PORTAL} target="_blank" rel="noopener" class="u-copper hover:text-copper">
                         gestion.recoba.casa
                       </a>{' '}
-                      y{' '}
+                      {t.demos.and}{' '}
                       <a href={DEMO_ADMIN} target="_blank" rel="noopener" class="u-copper hover:text-copper">
                         gestion.recoba.casa/admin
                       </a>
-                      , con datos de ejemplo.
+                      {t.demos.after}
                     </p>
                   )}
                 </div>

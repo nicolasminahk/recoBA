@@ -1,41 +1,24 @@
 ---
-const problemas = [
-  {
-    titulo: 'Horas de reporting manual.',
-    texto: 'Cada informe al inversor o al comité se arma a mano, copiando de varias fuentes.',
-    icon: 'reloj',
-  },
-  {
-    titulo: 'Desviaciones que se ven tarde.',
-    texto: 'El gasto real frente al presupuesto por partida no está a la vista hasta el cierre.',
-    icon: 'desvio',
-  },
-  {
-    titulo: 'Confianza que depende de una llamada.',
-    texto: 'Quien pone el capital no tiene dónde mirar el estado real de su dinero.',
-    icon: 'llamada',
-  },
-];
+import { useT } from '../i18n/index.js';
 
-const fuentes = ['WhatsApp', 'Excel', 'Correo', 'Drive', 'Una llamada'];
+const t = useT(Astro).problema;
+const { problemas, fuentes } = t;
 ---
 
 <section id="punto-de-partida" class="relative py-20 md:py-28">
   <div class="mx-auto max-w-[88rem] px-5 md:px-10">
     <div class="grid grid-cols-12 gap-x-6 gap-y-8">
       <div class="col-span-12 lg:col-span-6">
-        <p class="eyebrow text-copper" data-reveal>El punto de partida</p>
+        <p class="eyebrow text-copper" data-reveal>{t.eyebrow}</p>
         <h2 class="display mt-4 text-[clamp(2rem,4.2vw,3.6rem)]" data-reveal>
-          Hoy el seguimiento de una inversión vive repartido en cinco sitios.
+          {t.title}
         </h2>
       </div>
       <div class="col-span-12 flex flex-col justify-end lg:col-span-5 lg:col-start-8">
         <p class="text-lg text-ink/70" data-reveal>
-          Fotos en WhatsApp, presupuestos en Excel, facturas en el correo, contratos
-          en una carpeta compartida y un inversor que llama para preguntar cómo va la
-          obra.
+          {t.lead}
         </p>
-        <ul class="mt-6 flex flex-wrap gap-2" aria-label="Dónde vive hoy la información" data-reveal>
+        <ul class="mt-6 flex flex-wrap gap-2" aria-label={t.fuentesAria} data-reveal>
           {
             fuentes.map((f) => (
               <li class="rounded-full border border-ink/15 px-3.5 py-1.5 text-[0.8rem] font-medium text-ink/65">

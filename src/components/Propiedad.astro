@@ -1,48 +1,29 @@
 ---
 import Shot from './Shot.astro';
 import ajustes from '../assets/shots/admin-ajustes-instalacion.png';
+import { useT } from '../i18n/index.js';
 
-const tarjetas = [
-  {
-    titulo: 'Licencia de uso',
-    items: ['Perpetua sobre su instalación', 'Sin cuota obligatoria', 'Sus datos, exportables cuando quiera'],
-    icon: 'licencia',
-  },
-  {
-    titulo: 'Su infraestructura',
-    items: [
-      'Datos y archivos alojados en la UE',
-      'Su marca y su dominio',
-      'Aprox. 50–80 € al mes, pagados directamente a cada proveedor',
-    ],
-    icon: 'infra',
-  },
-  {
-    titulo: 'Seguridad',
-    items: ['Solo entran personas invitadas', 'Cada perfil ve solo lo que le corresponde', 'Copias de seguridad diarias'],
-    icon: 'seguridad',
-  },
-];
+const t = useT(Astro).propiedad;
+const { tarjetas } = t;
 ---
 
 <section id="propiedad" class="relative py-20 md:py-28">
   <div class="mx-auto max-w-[88rem] px-5 md:px-10">
     <div class="grid grid-cols-12 gap-x-6 gap-y-10">
       <div class="col-span-12 lg:col-span-5">
-        <p class="eyebrow text-copper" data-reveal>Propiedad y seguridad</p>
+        <p class="eyebrow text-copper" data-reveal>{t.eyebrow}</p>
         <h2 class="display mt-4 text-[clamp(2rem,4.2vw,3.6rem)]" data-reveal>
-          Instalado en las cuentas de su empresa. Suyo.
+          {t.title}
         </h2>
         <p class="mt-5 max-w-[34rem] text-lg text-ink/70" data-reveal>
-          No es una suscripción a una plataforma ajena: la instalación, los datos y
-          el dominio son de su empresa desde el primer día.
+          {t.lead}
         </p>
       </div>
       <div class="col-span-12 lg:col-span-6 lg:col-start-7">
         <Shot
           src={ajustes}
           domain="gestion.recoba.casa/admin"
-          alt="Ajustes de instalación en el panel de administración: nombre de la empresa, dominio propio, marca y proveedores de alojamiento configurados en las cuentas del cliente"
+          alt={t.alt}
         />
       </div>
     </div>
@@ -87,11 +68,10 @@ const tarjetas = [
 
     <div class="mt-6 rounded-2xl border border-ink/12 px-7 py-6 md:flex md:items-center md:justify-between md:gap-8" data-reveal>
       <p class="text-[0.95rem] leading-relaxed text-ink/75">
-        <strong class="font-semibold text-ink">Mantenimiento opcional:</strong> actualizaciones,
-        copias verificadas, soporte y pequeñas mejoras.
+        <strong class="font-semibold text-ink">{t.mantenimientoLabel}</strong> {t.mantenimiento}
       </p>
       <p class="mt-2 text-[0.95rem] text-ink/60 md:mt-0 md:shrink-0">
-        Si no lo contrata, la plataforma sigue siendo suya.
+        {t.mantenimientoNota}
       </p>
     </div>
   </div>
